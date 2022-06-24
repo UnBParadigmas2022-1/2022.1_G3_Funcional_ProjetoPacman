@@ -3,17 +3,13 @@ module Game where
 import Graphics.Gloss
 import Graphics.Gloss.Interface.Pure.Game
 
+import Types
 import Map
 
-
-type Game = Mapa
-
-
-game = Map.mapaAtual
-
+type Game = (CellSize, Width, Mapa)
 
 drawGame :: Game -> Picture
-drawGame game = Circle 50
+drawGame (cellSize, width, mapa) = pictures (Map.drawMapa cellSize width mapa 0 0)
 
 updateGame :: Float -> Game -> Game
 updateGame dt game = game

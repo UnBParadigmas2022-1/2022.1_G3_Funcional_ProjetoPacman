@@ -4,17 +4,23 @@ import Graphics.Gloss
 import Graphics.Gloss.Interface.Pure.Game
 
 import Game
+import Types
+import Map
 
 title  = "Pacman"
 
 fps = 5
 
-width       = 800       :: Float
-height      = 600       :: Float
-cellSize    = 20        :: Float
+cellSize    = 25                    :: CellSize
+width       = mapWidth*cellSize     :: Width
+height      = mapHeight*cellSize    :: Float
 
 startX = (cellSize - width)  / 2.0
 startY = (height - cellSize) / 2.0
+
+
+game :: Game
+game = (cellSize, width, Map.mapaAtual)
 
 
 window :: Display
@@ -29,7 +35,7 @@ main = play
     window
     white
     fps
-    Game.game
+    game
     drawingFunc
     Game.inputHandler
     Game.updateGame

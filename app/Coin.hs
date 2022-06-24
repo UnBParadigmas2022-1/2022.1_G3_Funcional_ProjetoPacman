@@ -1,0 +1,1 @@
+module Coin where
