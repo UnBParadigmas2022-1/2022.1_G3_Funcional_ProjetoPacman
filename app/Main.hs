@@ -11,9 +11,9 @@ title  = "Pacman"
 
 fps = 5
 
-cellSize    = 25                    :: CellSize
-width       = mapWidth*cellSize     :: Width
-height      = mapHeight*cellSize    :: Float
+cellSize    = 25                     :: CellSize
+width       = mapaWidth*cellSize     :: Width
+height      = mapaHeight*cellSize    :: Float
 
 startX = (cellSize - width)  / 2.0
 startY = (height - cellSize) / 2.0
