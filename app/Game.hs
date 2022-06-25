@@ -9,7 +9,7 @@ import Map
 type Game = (CellSize, Width, Mapa)
 
 drawGame :: Game -> Picture
-drawGame (cellSize, width, mapa) = pictures (Map.drawMapa cellSize width mapa 0 0)
+drawGame (cellSize, width, mapa) = pictures (Map.drawMapa cellSize width mapa (0, 0))
 
 updateGame :: Float -> Game -> Game
 updateGame dt game = game

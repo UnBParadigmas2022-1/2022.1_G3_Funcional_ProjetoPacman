@@ -59,16 +59,18 @@ colorCell x = white
 drawMapaCell :: CellSize -> Float -> Float -> Cell -> Picture
 drawMapaCell cellSize x y cell = translate x y $ color (colorCell cell) $ rectangleSolid cellSize cellSize
 
-drawMapa :: CellSize -> Width -> Mapa -> Float -> Float -> [Picture]
-drawMapa _ _ [] _ _ = []
-drawMapa cellSize width (h:t) x y = drawMapaCell cellSize x y h : drawMapa cellSize width t (nextX x) (nextY y)
+drawMapa :: CellSize -> Width -> Mapa -> Point -> [Picture]
+drawMapa _ _ [] _ = []
+drawMapa cellSize width (h:t) (x, y) = drawMapaCell cellSize x y h : drawMapa cellSize width t nextPoint
     where
-        nextX xx
-            | mod' (xx + cellSize) width == 0 = 0
-            | otherwise = xx + cellSize
-        nextY yy
-            | mod' (x + cellSize) width == 0 = yy - cellSize
-            | otherwise = yy
+        newLine = mod' (x + cellSize) width == 0
+        nextPoint = (nextX, nextY)
+        nextX
+            | newLine = 0
+            | otherwise = x + cellSize
+        nextY
+            | newLine = y - cellSize
+            | otherwise = y
 
 
 -- Utils
@@ -94,5 +96,5 @@ freeAdjsPoints (x, y) = filter isCellFree points
     where
         points = map (\(i, j) -> (x+i, y+j)) adjs
 
-wallCollision :: Point -> Bool
-wallCollision point = getCellValue point == 0
+isWallCell :: Point -> Bool
+isWallCell point = getCellValue point == 0
