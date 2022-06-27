@@ -1,6 +1,7 @@
 module Utils where
 
 type Mapa = [[Int]]
+type Pos = (Int, Int)
 
 mapaAtual :: Mapa
 mapaAtual = [
