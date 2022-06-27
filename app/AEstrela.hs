@@ -1,5 +1,4 @@
--- module AEstrela (menorCaminho) where
-module AEstrela where
+module AEstrela (menorCaminho) where
 
 import Data.Heap
 import Utils (mapaAtual, Pos, Mapa)
@@ -19,9 +18,7 @@ menorCaminho posInicial posFinal = caminho
         mapa = mapaAtual
         heap = insereHeap posInicial 0 0 (empty :: MinPrioHeap Int Valor)
         caminho = aEstrela mapa [] [] posInicial posFinal heap
-        -- caminho = []
 
--- TODO: essas funções são genéricas
 mapaHeight = 31
 mapaWidth = 28
 mapaLength =
@@ -50,8 +47,8 @@ calcDist :: Pos -> Pos -> Mapa -> Int
 calcDist (xInicial, yInicial) (xFinal, yFinal) mapa =
     ((xFinal - xInicial) ^ 2) + ((yFinal - yInicial) ^ 2) + mapa !! yInicial !! xInicial
 
-calcCaminho :: Mapa -> [Pos] -> [Pos] -> Pos -> Pos -> MinPrioHeap Int Valor -> (Pos, MinPrioHeap Int Valor)
-calcCaminho mapa caminho visitados posInicial posFinal heap = do
+calcCaminho :: Mapa -> [Pos] -> Pos -> Pos -> MinPrioHeap Int Valor -> (Pos, MinPrioHeap Int Valor)
+calcCaminho mapa visitados posInicial posFinal heap = do
     let Just ((_, (gAtual, selecionado)), heapPop) = view heap
     let adjsLivres = freeAdjs mapa posInicial visitados
     let novaHeap = foldl (\heap adj -> insereHeap adj (calcDist adj posFinal mapa) (gAtual + 1) heap) heapPop adjsLivres
