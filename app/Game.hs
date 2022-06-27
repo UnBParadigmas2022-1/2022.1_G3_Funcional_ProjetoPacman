@@ -7,13 +7,13 @@ import Types
 import Map
 import Scoreboard
 
-type Game = (CellSize, Width, Height, Mapa)
+type Game = (CellSize, Width, Height, Mapa, Score)
 
 drawGame :: Game -> Picture
-drawGame (cellSize, width, height, mapa) = pictures $ (Map.drawMapa cellSize width mapa (0, 0) ++ [Scoreboard.drawScoreboard height 50])
+drawGame (cellSize, width, height, mapa, score) = pictures $ (Map.drawMapa cellSize width mapa (0, 0) ++ [Scoreboard.drawScoreboard height score])
 
 updateGame :: Float -> Game -> Game
-updateGame dt game = game
+updateGame dt (cellSize, width, height, mapa, score) = (cellSize, width, height, mapa, (score+1) `mod` 255)
 
 inputHandler :: Event -> Game -> Game
 inputHandler _ g = g

@@ -21,7 +21,7 @@ startY = (height - cellSize) / 2.0
 background = black
 
 game :: Game
-game = (cellSize, width, height, Map.mapaAtual)
+game = (cellSize, width, height, Map.mapaAtual, 0)
 
 
 window :: Display
