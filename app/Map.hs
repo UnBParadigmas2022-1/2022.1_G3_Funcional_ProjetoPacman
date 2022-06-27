@@ -54,7 +54,9 @@ mapaAtual = [
 colorCell :: Cell -> Color
 colorCell 0 = black
 colorCell 1 = magenta
-colorCell x = white
+colorCell 2 = makeColor 1 1 (51/255) 1
+colorCell 3 = makeColor 1 (128/255) 0 1
+colorCell 4 = makeColor 1 0 0 1
 
 drawMapaCell :: CellSize -> Float -> Float -> Cell -> Picture
 drawMapaCell cellSize x y cell = translate x y $ color (colorCell cell) $ rectangleSolid cellSize cellSize
