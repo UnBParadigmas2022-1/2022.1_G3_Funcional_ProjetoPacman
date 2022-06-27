@@ -5,11 +5,12 @@ import Graphics.Gloss.Interface.Pure.Game
 
 import Types
 import Map
+import Scoreboard
 
-type Game = (CellSize, Width, Mapa)
+type Game = (CellSize, Width, Height, Mapa)
 
 drawGame :: Game -> Picture
-drawGame (cellSize, width, mapa) = pictures (Map.drawMapa cellSize width mapa (0, 0))
+drawGame (cellSize, width, height, mapa) = pictures $ (Map.drawMapa cellSize width mapa (0, 0) ++ [Scoreboard.drawScoreboard height 50])
 
 updateGame :: Float -> Game -> Game
 updateGame dt game = game

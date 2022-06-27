@@ -11,16 +11,17 @@ title  = "Pacman"
 
 fps = 5
 
-cellSize    = 25                     :: CellSize
-width       = mapaWidth*cellSize     :: Width
-height      = mapaHeight*cellSize    :: Float
+cellSize    = 25                            :: CellSize
+width       = mapaWidth*cellSize            :: Width
+height      = (mapaHeight + 2)*cellSize     :: Height
 
 startX = (cellSize - width)  / 2.0
 startY = (height - cellSize) / 2.0
 
+background = black
 
 game :: Game
-game = (cellSize, width, Map.mapaAtual)
+game = (cellSize, width, height, Map.mapaAtual)
 
 
 window :: Display
@@ -33,7 +34,7 @@ window = (InWindow title (iwidth, iheight) (0, 0))
 main :: IO ()
 main = play
     window
-    white
+    background
     fps
     game
     drawingFunc
