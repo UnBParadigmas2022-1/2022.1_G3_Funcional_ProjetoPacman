@@ -6,6 +6,7 @@ import Graphics.Gloss.Interface.Pure.Game
 import Game
 import Types
 import Map
+import Menu
 
 title  = "Pacman"
 
@@ -31,23 +32,29 @@ window = (InWindow title (iwidth, iheight) (0, 0))
 main :: IO ()
 main = do
     assets <- loadAssets
-    let game = (cellSize, width, Map.mapaAtual, assets) :: Game
+    let game = (cellSize, width, Map.mapaAtual, assets, MENU) :: Game
 
     play
         window
-        white
+        black
         fps
         game
         drawingFunc
-        Game.inputHandler
+        inputHandler
         Game.updateGame
 
 
 drawingFunc :: Game -> Picture
-drawingFunc game = translate startX startY (Game.drawGame game)
+drawingFunc (cellSize, width, mapa, assets, MENU) = drawMenu width
+drawingFunc (cellSize, width, mapa, assets, GAME)  = translate startX startY (drawGame (cellSize, width, mapa, assets, GAME))
 
 
 loadAssets :: IO [Picture]
 loadAssets = mapM load assetsName
     where
         load image = loadBMP ("assets/" ++ image ++ ".bmp")
+
+
+inputHandler :: Event -> Game -> Game
+inputHandler event (cellSize, width, mapa, assets, MENU) = menuInputHandler event (cellSize, width, mapa, assets, MENU)
+inputHandler event (cellSize, width, mapa, assets, GAME) = gameInputHandler event (cellSize, width, mapa, assets, GAME)

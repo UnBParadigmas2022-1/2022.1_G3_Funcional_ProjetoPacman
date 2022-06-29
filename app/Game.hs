@@ -8,10 +8,11 @@ import Map
 
 
 drawGame :: Game -> Picture
-drawGame (cellSize, width, mapa, assets) = pictures (Map.drawMapa assets cellSize width mapa (0, 0))
+drawGame (cellSize, width, mapa, assets, state) = pictures (Map.drawMapa assets cellSize width mapa (0, 0))
 
 updateGame :: Float -> Game -> Game
 updateGame dt game = game
 
-inputHandler :: Event -> Game -> Game
-inputHandler _ g = g
+gameInputHandler :: Event -> Game -> Game
+gameInputHandler _ g = g
+
