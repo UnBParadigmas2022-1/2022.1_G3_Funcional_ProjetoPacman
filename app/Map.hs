@@ -4,10 +4,8 @@ import Graphics.Gloss
 import Graphics.Gloss.Interface.Pure.Game
 import Data.Fixed
 
-import Types (CellSize, Width)
+import Types
 
-type Cell = Float
-type Mapa = [Cell]
 
 mapaWidth  = 28      :: Float
 mapaHeight = 31      :: Float
@@ -51,19 +49,19 @@ mapaAtual = [
 
 -- Draw
 
-colorCell :: Cell -> Color
-colorCell 0 = black
-colorCell 1 = magenta
-colorCell 2 = makeColor 1 1 (51/255) 1
-colorCell 3 = makeColor 1 (128/255) 0 1
-colorCell 4 = makeColor 1 0 0 1
+imageCell :: Cell -> Assets -> CellSize -> Picture
+imageCell 0 (wall:_) _ = wall
+imageCell 1 _ cellSize = color black $ rectangleSolid cellSize cellSize
+imageCell 2 [_, gold, _, _] _    = gold
+imageCell 3 [_, _, diamond, _] _ = diamond
+imageCell 4 [_, _, _, nether] _  = nether
 
-drawMapaCell :: CellSize -> Float -> Float -> Cell -> Picture
-drawMapaCell cellSize x y cell = translate x y $ color (colorCell cell) $ rectangleSolid cellSize cellSize
+drawMapaCell :: Assets -> CellSize -> Float -> Float -> Cell -> Picture
+drawMapaCell assets cellSize x y cell = translate x y $ imageCell cell assets cellSize
 
-drawMapa :: CellSize -> Width -> Mapa -> Point -> [Picture]
-drawMapa _ _ [] _ = []
-drawMapa cellSize width (h:t) (x, y) = drawMapaCell cellSize x y h : drawMapa cellSize width t nextPoint
+drawMapa :: Assets -> CellSize -> Width -> Mapa -> Point -> [Picture]
+drawMapa _ _ _ [] _ = []
+drawMapa assets cellSize width (h:t) (x, y) = drawMapaCell assets cellSize x y h : drawMapa assets cellSize width t nextPoint
     where
         newLine = mod' (x + cellSize) width == 0
         nextPoint = (nextX, nextY)
