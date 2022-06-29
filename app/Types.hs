@@ -12,4 +12,10 @@ type Mapa = [Cell]
 
 type Assets = [Picture]
 
-type Game = (CellSize, Width, Mapa, Assets)
+data State =
+      MENU
+    | GAME
+    | END
+    deriving(Enum, Ord, Eq)
+
+type Game = (CellSize, Width, Mapa, Assets, State)
