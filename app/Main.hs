@@ -18,9 +18,7 @@ height      = mapaHeight*cellSize    :: Float
 startX = (cellSize - width)  / 2.0
 startY = (height - cellSize) / 2.0
 
-
-game :: Game
-game = (cellSize, width, Map.mapaAtual)
+assetsName = ["wall", "gold", "diamond", "nether"]
 
 
 window :: Display
@@ -31,15 +29,25 @@ window = (InWindow title (iwidth, iheight) (0, 0))
 
 
 main :: IO ()
-main = play
-    window
-    white
-    fps
-    game
-    drawingFunc
-    Game.inputHandler
-    Game.updateGame
+main = do
+    assets <- loadAssets
+    let game = (cellSize, width, Map.mapaAtual, assets) :: Game
+
+    play
+        window
+        white
+        fps
+        game
+        drawingFunc
+        Game.inputHandler
+        Game.updateGame
 
 
 drawingFunc :: Game -> Picture
 drawingFunc game = translate startX startY (Game.drawGame game)
+
+
+loadAssets :: IO [Picture]
+loadAssets = mapM load assetsName
+    where
+        load image = loadBMP ("assets/" ++ image ++ ".bmp")

@@ -9,7 +9,6 @@ type Width    = Float
 type Cell = Float
 type Mapa = [Cell]
 
-type Wall = Picture
-type Assets = [Wall]
+type Assets = [Picture]
 
 type Game = (CellSize, Width, Mapa, Assets)
