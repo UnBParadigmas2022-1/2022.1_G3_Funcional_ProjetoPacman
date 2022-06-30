@@ -32,7 +32,7 @@ window = (InWindow title (iwidth, iheight) (0, 0))
 main :: IO ()
 main = do
     assets <- loadAssets
-    let game = (cellSize, width, Map.mapaAtual, assets, MENU) :: Game
+    let game = (cellSize, width, Map.mapaAtual, assets, MENU, BFS) :: Game
 
     play
         window
@@ -45,8 +45,8 @@ main = do
 
 
 drawingFunc :: Game -> Picture
-drawingFunc (cellSize, width, mapa, assets, MENU) = drawMenu width
-drawingFunc (cellSize, width, mapa, assets, GAME)  = translate startX startY (drawGame (cellSize, width, mapa, assets, GAME))
+drawingFunc (cellSize, width, mapa, assets, MENU, algo) = drawMenu width title
+drawingFunc (cellSize, width, mapa, assets, GAME, algo)  = translate startX startY (drawGame (cellSize, width, mapa, assets, GAME, algo))
 
 
 loadAssets :: IO [Picture]
@@ -56,5 +56,5 @@ loadAssets = mapM load assetsName
 
 
 inputHandler :: Event -> Game -> Game
-inputHandler event (cellSize, width, mapa, assets, MENU) = menuInputHandler event (cellSize, width, mapa, assets, MENU)
-inputHandler event (cellSize, width, mapa, assets, GAME) = gameInputHandler event (cellSize, width, mapa, assets, GAME)
+inputHandler event (cellSize, width, mapa, assets, MENU, algo) = menuInputHandler event (cellSize, width, mapa, assets, MENU, algo)
+inputHandler event (cellSize, width, mapa, assets, GAME, algo) = gameInputHandler event (cellSize, width, mapa, assets, GAME, algo)

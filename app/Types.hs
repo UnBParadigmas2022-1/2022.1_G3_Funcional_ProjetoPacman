@@ -18,4 +18,11 @@ data State =
     | END
     deriving(Enum, Ord, Eq)
 
-type Game = (CellSize, Width, Mapa, Assets, State)
+data Algorithm =
+      BFS
+    | DFS
+    | DJK
+    | ASTAR
+    deriving(Enum, Ord, Eq)
+
+type Game = (CellSize, Width, Mapa, Assets, State, Algorithm)

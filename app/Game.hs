@@ -8,7 +8,7 @@ import Map
 
 
 drawGame :: Game -> Picture
-drawGame (cellSize, width, mapa, assets, state) = pictures (Map.drawMapa assets cellSize width mapa (0, 0))
+drawGame (cellSize, width, mapa, assets, state, algo) = pictures (Map.drawMapa assets cellSize width mapa (0, 0))
 
 updateGame :: Float -> Game -> Game
 updateGame dt game = game
