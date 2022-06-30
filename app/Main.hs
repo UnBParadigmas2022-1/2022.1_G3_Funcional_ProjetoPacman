@@ -18,7 +18,7 @@ height      = mapaHeight*cellSize    :: Float
 startX = (cellSize - width)  / 2.0
 startY = (height - cellSize) / 2.0
 
-assetsName = ["wall", "gold", "diamond", "nether"]
+assetsName = ["wall", "gold", "diamond", "nether", "orange-ghost"]
 
 
 window :: Display
