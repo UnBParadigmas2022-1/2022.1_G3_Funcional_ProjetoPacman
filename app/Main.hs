@@ -11,14 +11,17 @@ title  = "Pacman"
 
 fps = 5
 
-cellSize    = 25                     :: CellSize
-width       = mapaWidth*cellSize     :: Width
-height      = mapaHeight*cellSize    :: Float
+cellSize    = 25                            :: CellSize
+width       = mapaWidth*cellSize            :: Width
+height      = (mapaHeight + 2)*cellSize     :: Height
 
 startX = (cellSize - width)  / 2.0
 startY = (height - cellSize) / 2.0
 
-assetsName = ["wall", "gold", "diamond", "nether"]
+background = black
+
+game :: Game
+game = (cellSize, width, height, Map.mapaAtual, 0)
 
 
 window :: Display

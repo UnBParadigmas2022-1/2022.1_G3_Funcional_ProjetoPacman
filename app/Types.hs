@@ -14,3 +14,4 @@ type Assets = [Picture]
 type Coin = Point
 
 type Game = (CellSize, Width, Mapa, Assets, Coin)
+type Height   = Float
