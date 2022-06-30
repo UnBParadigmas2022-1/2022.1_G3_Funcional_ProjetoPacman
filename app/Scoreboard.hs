@@ -6,11 +6,13 @@ import Graphics.Gloss.Interface.Pure.Game
 import Types
 
 
-type Score = Int
-
-
 drawScoreboard :: Height -> Score -> Picture
-drawScoreboard height score = translate x y $ scale scaleValue scaleValue $ color white $ text $ "Pontuacao: " ++ show score
+drawScoreboard height score = 
+    translate x y 
+        $ scale scaleValue scaleValue 
+        $ color white 
+        $ text 
+        $ "Pontuacao: " ++ show score
     where
         scaleValue = 0.3
         x = 0

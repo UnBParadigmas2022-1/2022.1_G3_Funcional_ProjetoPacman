@@ -18,14 +18,16 @@ height      = (mapaHeight + 2)*cellSize     :: Height
 startX = (cellSize - width)  / 2.0
 startY = (height - cellSize) / 2.0
 
+assetsName = ["wall", "gold", "diamond", "nether"]
+
 background = black
 
-game :: Game
-game = (cellSize, width, height, Map.mapaAtual, 0)
+-- game :: Game
+-- game = (cellSize, width, height, Map.mapaAtual, (0,), 0)
 
 
 window :: Display
-window = (InWindow title (iwidth, iheight) (0, 0))
+window = InWindow title (iwidth, iheight) (0, 0)
     where
         iwidth  = round width
         iheight = round height
@@ -34,11 +36,11 @@ window = (InWindow title (iwidth, iheight) (0, 0))
 main :: IO ()
 main = do
     assets <- loadAssets
-    let game = (cellSize, width, Map.mapaAtual, assets, (0, 0)) :: Game
+    let game = (cellSize, width, height, Map.mapaAtual, assets, (0, 0), 0) :: Game
 
     play
         window
-        white
+        background
         fps
         game
         drawingFunc
