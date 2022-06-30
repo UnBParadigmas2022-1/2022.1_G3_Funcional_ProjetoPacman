@@ -11,4 +11,6 @@ type Mapa = [Cell]
 
 type Assets = [Picture]
 
-type Game = (CellSize, Width, Mapa, Assets)
+type Coin = Point
+
+type Game = (CellSize, Width, Mapa, Assets, Coin)
