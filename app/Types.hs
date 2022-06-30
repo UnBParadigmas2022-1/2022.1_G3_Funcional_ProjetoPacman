@@ -1,6 +1,7 @@
 module Types where
 
 import Graphics.Gloss
+import Data.List
 
 
 type CellSize = Float
