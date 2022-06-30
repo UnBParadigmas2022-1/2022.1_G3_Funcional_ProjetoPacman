@@ -5,6 +5,8 @@ import Data.List
 import Graphics.Gloss
 
 import Map
+import Types
+
 
 type Valor = (Int, Point)
 
