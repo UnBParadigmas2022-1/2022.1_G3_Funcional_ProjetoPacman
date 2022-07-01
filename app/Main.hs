@@ -18,7 +18,7 @@ height      = (mapaHeight + 2)*cellSize     :: Height
 startX = (cellSize - width)  / 2.0
 startY = (height - cellSize) / 2.0
 
-assetsName = ["wall", "gold", "diamond", "nether"]
+assetsName = ["wall", "gold", "diamond", "nether", "coin"]
 
 background = black
 
@@ -36,7 +36,7 @@ window = InWindow title (iwidth, iheight) (0, 0)
 main :: IO ()
 main = do
     assets <- loadAssets
-    let game = (cellSize, width, height, Map.mapaAtual, assets, (0, 0), 0) :: Game
+    let game = (cellSize, width, height, Map.mapaAtual, assets, 0) :: Game
 
     play
         window
