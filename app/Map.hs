@@ -98,3 +98,7 @@ freeAdjsPoints (x, y) = filter isCellFree points
 
 isWallCell :: Point -> Bool
 isWallCell point = getCellValue point == 0
+
+isTunnel :: Point -> Bool
+isTunnel (x, y) = not (isWallCell (x, y))
+    && (x == mapaWidth-1 || y == mapaHeight-1 || x == 0 || y == 0 )

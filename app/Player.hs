@@ -13,8 +13,15 @@ drawPlayer cellSize ((x, y), (_, _)) =
 
 updatePlayer :: Game -> Game
 updatePlayer (cellSize, width, mapa, assets, ((x, y), (sx, sy)))
-    | Map.isWallCell (x+sx, y+sy) = (cellSize, width, mapa, assets, ((x, y), (0, 0)))
-    | otherwise = (cellSize, width, mapa, assets, ((x+sx, y+sy), (sx, sy)))
+    | Map.isTunnel (x+sx, y+sy)     = (cellSize, width, mapa, assets, (jumpPlayer ((x, y), (sx, sy))))
+    | Map.isWallCell (x+sx, y+sy)   = (cellSize, width, mapa, assets, ((x, y), (0, 0)))
+    | otherwise                     = (cellSize, width, mapa, assets, ((x+sx, y+sy), (sx, sy)))
+
+jumpPlayer :: Player -> Player
+jumpPlayer ((x, y), (sx, sy))
+    | sx > 0    = ((0, y), (sx, sy))
+    | sx < 0    = ((Map.mapaWidth-1, y), (sx, sy))
+    | otherwise = ((x, y), (sx, sy))
 
 inputPlayer :: Event -> Game -> Game
 inputPlayer (EventKey (SpecialKey KeyUp) Down _ _) game = movePlayer (0, -1) game
