@@ -12,7 +12,8 @@ type Mapa = [Cell]
 
 type Slow = Float
 type Ghost = (Float, Float, Float)
+type Ghosts = [Ghost]
 
 type Assets = [Picture]
 
-type Game = (CellSize, Width, Mapa, Assets, Ghost)
+type Game = (CellSize, Width, Mapa, Assets, Ghosts)
