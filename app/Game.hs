@@ -12,23 +12,21 @@ import Coin ( drawCoin )
 -- type Game = (CellSize, Width, Height, Mapa, Score)
 
 drawGame :: Game -> Picture
-drawGame (cellSize, width, height, mapa, assets, (x, y), score) = 
+drawGame (cellSize, width, height, mapa, assets, score) = 
     pictures 
     $ (Map.drawMapa assets cellSize width mapa (0, 0) 
     ++ [Scoreboard.drawScoreboard height score])
     ++ coin
-    
     where
-        coin = drawCoin cellSize (x, y)
+        coin = drawCoin cellSize assets
 
 updateGame :: Float -> Game -> Game
-updateGame dt (cellSize, width, height, mapa, assets, (x, y), score) = 
+updateGame dt (cellSize, width, height, mapa, assets, score) = 
     (cellSize, 
         width, 
         height,
         mapa,
-        assets,
-        (x + 1, y), 
+        assets, 
         (score+1) `mod` 255)
 
 inputHandler :: Event -> Game -> Game

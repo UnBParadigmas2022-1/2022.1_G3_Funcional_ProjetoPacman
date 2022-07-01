@@ -16,5 +16,5 @@ type Coin = Point
 
 type Score = Int
 
-type Game = (CellSize, Width, Height, Mapa, Assets, Coin, Score)
+type Game = (CellSize, Width, Height, Mapa, Assets, Score)
 type Height   = Float
