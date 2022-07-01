@@ -17,4 +17,4 @@ type Ghost = (Float, Float)
 type Coin = Point
 type Score = Int
 
-type Game = (CellSize, Width, Height, Mapa, Assets, Ghost, Score)
+type Game = (CellSize, Width, Height, Mapa, Assets, Ghost, Coin, Score)

@@ -34,7 +34,7 @@ window = InWindow title (iwidth, iheight) (0, 0)
 main :: IO ()
 main = do
     assets <- loadAssets
-    let game = (cellSize, width, height, Map.mapaAtual, assets, (1,-1), 0) :: Game
+    let game = (cellSize, width, height, Map.mapaAtual, assets, (1,-1), (13, -11), 0) :: Game
 
     play
         window

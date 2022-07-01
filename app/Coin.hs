@@ -11,26 +11,24 @@ import Types
 import GHC.Float (int2Float)
 
 
-drawCoin :: Float -> Assets -> Picture
-drawCoin cellSize [_, _, _, _, _, coin] =
+drawCoin :: Float -> Assets -> Coin -> Picture
+drawCoin cellSize [_, _, _, _, _, coin] (x, y) =
     translate newX newY coin
     where
-        (x, y) = (3, -1)
         newX = x * cellSize
         newY = y * cellSize
 
 
-generateRandom :: Point -> Point
-generateRandom (x, y) = 
-    (unsafePerformIO (getStdRandom (randomR (0, 28))),  
-    unsafePerformIO (getStdRandom (randomR (0, 31))))
+generateRandom :: Float -> (Int, Int)
+generateRandom dt = 
+    (unsafePerformIO (randomRIO (0, round Map.mapaWidth)),  
+    unsafePerformIO (randomRIO (0, round Map.mapaHeight)))
 
 
--- nextPosition :: Point
--- nextPosition
---     | cellFree = random
---     | otherwise = nextPosition
---     where
---         (x, y) = generateRandom (0, 31)
---         random = (int2Float (round x), int2Float(round y))
---         cellFree = isCellFree random
+updateCoin :: Float -> Coin
+updateCoin dt
+    | isCellFree random = random
+    | otherwise = updateCoin (dt+1)
+    where
+        (x, y) = generateRandom dt
+        random = (int2Float x, -(int2Float y))
