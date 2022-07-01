@@ -14,6 +14,7 @@ fps = 5
 cellSize    = 25                     :: CellSize
 width       = mapaWidth*cellSize     :: Width
 height      = mapaHeight*cellSize    :: Float
+player      = ((13, 17), (1, 0))     :: Player
 
 startX = (cellSize - width)  / 2.0
 startY = (height - cellSize) / 2.0
@@ -31,7 +32,7 @@ window = (InWindow title (iwidth, iheight) (0, 0))
 main :: IO ()
 main = do
     assets <- loadAssets
-    let game = (cellSize, width, Map.mapaAtual, assets) :: Game
+    let game = (cellSize, width, Map.mapaAtual, assets, player) :: Game
 
     play
         window
