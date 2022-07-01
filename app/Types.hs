@@ -9,6 +9,7 @@ type Width    = Float
 
 type Cell = Float
 type Mapa = [Cell]
+type Ghost = (Float, Float)
 
 type Assets = [Picture]
 
@@ -25,4 +26,4 @@ data Algorithm =
     | ASTAR
     deriving(Enum, Ord, Eq)
 
-type Game = (CellSize, Width, Mapa, Assets, State, Algorithm)
+type Game = (CellSize, Width, Mapa, Assets, Ghost, State, Algorithm)
