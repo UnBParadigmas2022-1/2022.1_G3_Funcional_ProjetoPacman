@@ -12,7 +12,7 @@ bShortestPath:: Point -> Point -> Point
 bShortestPath posInicial posFinal = posProx
     where
         caminho = bfs [] (posInicial, posInicial) posFinal [(posInicial, posInicial)]
-        posProx = geraProximo (reverse caminho) posInicial
+        posProx = geraProximo caminho posInicial
 
 geraProximo :: [Valor] -> Point -> Point
 geraProximo [] inicial = inicial
@@ -36,5 +36,5 @@ bfs visitados (posInicial, _) posFinal fila
         posProx = (posAtual, posAnterior)
         valors2Points = map (\(pos, _) -> pos) visitados
         adjs = ((freeAdjsPoints posAtual) \\ valors2Points)
-        filaAdj = cauda ++ map (\pos -> (pos, posAtual)) adjs
-        novosVisitados = visitados ++ [(posAtual, posAnterior)]
+        filaAdj = map (\pos -> (pos, posAtual)) adjs
+        novosVisitados = (posAtual, posAnterior):visitados
