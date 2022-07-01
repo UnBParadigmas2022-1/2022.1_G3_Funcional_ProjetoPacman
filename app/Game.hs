@@ -5,29 +5,29 @@ import Graphics.Gloss.Interface.Pure.Game
 
 import Types
 import Map
+import Ghost
 
 import Scoreboard
-import Coin ( drawCoin )
+import Coin
 
--- type Game = (CellSize, Width, Height, Mapa, Score)
 
 drawGame :: Game -> Picture
-drawGame (cellSize, width, height, mapa, assets, score) = 
-    pictures 
-    $ (Map.drawMapa assets cellSize width mapa (0, 0) 
-    ++ [Scoreboard.drawScoreboard height score])
-    ++ coin
+drawGame (cellSize, width, height, mapa, assets, ghost, score) = 
+    pictures [dMap, dScoreboard, dCoin, dGhost]
     where
-        coin = drawCoin cellSize assets
+        dMap = pictures $ Map.drawMapa assets cellSize width mapa (0, 0)
+        dScoreboard = Scoreboard.drawScoreboard height score
+        dCoin = Coin.drawCoin cellSize assets
+        dGhost = Ghost.drawGhost assets cellSize ghost
+
 
 updateGame :: Float -> Game -> Game
-updateGame dt (cellSize, width, height, mapa, assets, score) = 
-    (cellSize, 
-        width, 
-        height,
-        mapa,
-        assets, 
-        (score+1) `mod` 255)
+updateGame dt (cellSize, width, height, mapa, assets, ghost, score) = 
+    (cellSize, width, height, mapa, assets, uGhost, uScore)
+    where
+        uGhost = Ghost.updateGhost ghost
+        uScore = (score+1) `mod` 255
+
 
 inputHandler :: Event -> Game -> Game
 inputHandler _ g = g

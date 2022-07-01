@@ -1,4 +1,4 @@
-module AEstrela (menorCaminho) where
+module AEstrela (aStar) where
 
 import Data.Heap
 import Data.List
@@ -9,6 +9,10 @@ import Types
 
 
 type Valor = (Int, Point)
+
+aStar posInicial posFinal
+    | posInicial == posFinal = posInicial
+    | otherwise = (menorCaminho posInicial posFinal) !! 1
 
 insereHeap :: Point -> Float -> Int -> MinPrioHeap Float Valor -> MinPrioHeap Float Valor
 insereHeap posInicial valorF valorG heap =
