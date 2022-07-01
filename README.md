@@ -1,31 +1,22 @@
-# RepositorioTemplate
-Esse repositório é para ser utilizado pelos grupos como um template inicial, da home page do Projeto.
-As seções do Template NÃO DEVEM SER OMITIDAS, sendo TODAS RELEVANTES.
-
-**!! *Atenção: Renomeie o seu repositório para (Ano.Semestre)_(Grupo)_(Paradigma)_(NomeDoProjeto)*. !!** 
-
-Paradigmas:
- - Funcional
- - Logico
- - SMA
-
-**!! *Não coloque os nomes dos alunos no título do repositório*. !!**
-
-**!! *Exemplo de título correto: 2022.1_G1_Logico_ProjetoRoteirosAereos*. !!**
- 
- (Apague esses comentários)
-
-# NomeDoProjeto
+# Pacman
 
 **Disciplina**: FGA0210 - PARADIGMAS DE PROGRAMAÇÃO - T01 <br>
-**Nro do Grupo**: XX<br>
-**Paradigma**: XXXXXXXXXX<br>
+**Nro do Grupo**: 03<br>
+**Paradigma**: Funcional<br>
 
 ## Alunos
+
 |Matrícula | Aluno |
-| -- | -- |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
+| :--: | :--: |
+| 20/2028211 |  [Antônio Aldísio](https://github.com/AntonioAldisio/) |
+| 19/0026243 |  [Dafne Moretti Moreira](https://github.com/DafneM/) |
+| 18/0122258 |  [Igor Queiroz Lima](https://github.com/igorq937/) |
+| 19/0030879 |  [João Pedro Moura Oliveira](https://github.com/Joao-Moura/) |
+| 17/0080102 |  [Lucas Gomes Lopes](https://github.com/LucasGlopes/) |
+| 18/0114093 |  [Lucas Ursulino Boaventura](https://github.com/lboaventura25/) |
+| 19/0019085 |  [Rafael Cleydson da Silva Ramos](https://github.com/RcleydsonR/) |
+| 19/0020377 |  [Thiago Sampaio de Paiva](https://github.com/thiagohdaqw/) |
+
 
 ## Sobre 
 Descreva o seu projeto em linhas gerais. 
