@@ -15,8 +15,22 @@ drawGame (cellSize, width, mapa, assets, ghost) = pictures $ (Map.drawMapa asset
 
 updateGame :: Float -> Game -> Game
 updateGame dt (cellSize, width, mapa, assets, ghost) = (cellSize, width, mapa, assets, uGhost)
+
     where 
-        uGhost = Ghost.updateGhost ghost
+        uGhost = updateGhostSlow ghost
+        
+getSlow 2 = 3
+getSlow 3 = 7
+getSlow 4 = 10
+getSlow 5 = 13
+
+updateGhostSlow (x, y, slow)
+    | actualValue == 1, slow == 0  = Ghost.updateGhost (x, y, -1)
+    | actualValue > 1, slow < 0 = (x, y, getSlow actualValue)
+    | slow > 0 = (x, y, slow - 1)
+    | otherwise = Ghost.updateGhost (x, y, slow)
+    where   
+        actualValue = getCellValue(x,y)
 
 inputHandler :: Event -> Game -> Game
 inputHandler _ g = g

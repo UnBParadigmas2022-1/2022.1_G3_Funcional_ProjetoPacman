@@ -9,7 +9,9 @@ type Width    = Float
 
 type Cell = Float
 type Mapa = [Cell]
-type Ghost = (Float, Float)
+
+type Slow = Float
+type Ghost = (Float, Float, Float)
 
 type Assets = [Picture]
 
