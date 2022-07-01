@@ -28,7 +28,7 @@ updateGame dt (cellSize, width, height, mapa, assets, ghost, coin, score) =
         uGhost = Ghost.updateGhost ghost
         uScore = (score+1) `mod` 10
         uCoin
-            | uScore == 0 = Coin.updateCoin dt
+            | uScore == 0 = Coin.updateCoin coin
             | otherwise = coin
 
 

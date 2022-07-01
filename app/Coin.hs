@@ -1,34 +1,29 @@
 module Coin where
 
-import Graphics.Gloss
-
 import System.Random
-import System.IO.Unsafe
+import Graphics.Gloss
+import GHC.Float (int2Float)
 
 import Map
-
 import Types
-import GHC.Float (int2Float)
 
 
 drawCoin :: Float -> Assets -> Coin -> Picture
-drawCoin cellSize [_, _, _, _, _, coin] (x, y) =
+drawCoin cellSize [_, _, _, _, _, coin] ((x, y), _) =
     translate newX newY coin
     where
         newX = x * cellSize
         newY = y * cellSize
 
 
-generateRandom :: Float -> (Int, Int)
-generateRandom dt = 
-    (unsafePerformIO (randomRIO (0, round Map.mapaWidth)),  
-    unsafePerformIO (randomRIO (0, round Map.mapaHeight)))
+generateRandom :: StdGen -> (Int, Int) -> (Int, StdGen)
+generateRandom seed range = uniformR range seed
 
-
-updateCoin :: Float -> Coin
-updateCoin dt
-    | isCellFree random = random
-    | otherwise = updateCoin (dt+1)
+updateCoin :: Coin -> Coin
+updateCoin (pos, seed)
+    | isCellFree random = (random, ySeed)
+    | otherwise = updateCoin (pos, ySeed)
     where
-        (x, y) = generateRandom dt
+        (x, xSeed) = generateRandom seed (0 :: Int, round (Map.mapaWidth-1))
+        (y, ySeed) = generateRandom xSeed (0 :: Int, round (Map.mapaHeight-1))
         random = (int2Float x, -(int2Float y))

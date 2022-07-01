@@ -2,6 +2,7 @@ module Types where
 
 import Graphics.Gloss
 import Data.List
+import System.Random
 
 
 type CellSize = Float
@@ -14,7 +15,7 @@ type Mapa = [Cell]
 type Assets = [Picture]
 
 type Ghost = (Float, Float)
-type Coin = Point
+type Coin = (Point, StdGen)
 type Score = Int
 
 type Game = (CellSize, Width, Height, Mapa, Assets, Ghost, Coin, Score)
