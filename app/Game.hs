@@ -7,7 +7,7 @@ import Types
 import Map
 
 import Scoreboard
-import Coin (generateCoinPosition, drawCoin)
+import Coin ( drawCoin )
 
 -- type Game = (CellSize, Width, Height, Mapa, Score)
 
