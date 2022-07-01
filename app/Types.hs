@@ -6,6 +6,7 @@ import Data.List
 
 type CellSize = Float
 type Width    = Float
+type MultValor = (Point, Point)
 
 type Cell = Float
 type Mapa = [Cell]

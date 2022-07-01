@@ -98,3 +98,16 @@ freeAdjsPoints (x, y) = filter isCellFree points
 
 isWallCell :: Point -> Bool
 isWallCell point = getCellValue point == 0
+
+geraProximo :: [MultValor] -> Point -> Point
+geraProximo [] inicial = inicial
+geraProximo [(f,p)] _ = f
+geraProximo [(f,p), _] _ = f
+geraProximo ((f,p):t) inicial = proximo t inicial p
+
+proximo :: [MultValor] -> Point -> Point -> Point
+proximo ((f,p):t) inicial anterior
+    | p == inicial && f == anterior = f
+    | f == anterior = proximo t inicial p
+    | otherwise = proximo t inicial anterior
+
