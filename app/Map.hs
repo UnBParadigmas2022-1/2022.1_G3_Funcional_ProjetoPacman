@@ -99,6 +99,18 @@ freeAdjsPoints (x, y) = filter isCellFree points
 isWallCell :: Point -> Bool
 isWallCell point = getCellValue point == 0
 
+generateNext :: [MultValor] -> Point -> Point
+generateNext [] initial = initial
+generateNext [(f,p)] _ = f
+generateNext [(f,p), _] _ = f
+generateNext ((f,p):t) initial = next t initial p
+
+next :: [MultValor] -> Point -> Point -> Point
+next ((f,p):t) initial previous
+    | p == initial && f == previous = f
+    | f == previous = next t initial p
+    | otherwise = next t initial previous
+
 isTunnel :: Point -> Bool
 isTunnel (x, y) = not (isWallCell (x, y))
     && (x == mapaWidth-1 || y == mapaHeight-1 || x == 0 || y == 0 )
