@@ -14,7 +14,7 @@ import Coin
 
 drawGame :: Game -> Picture
 drawGame (cellSize, width, height, mapa, assets, player, ghost, coin, score) = 
-    pictures [dMap, dPlayer, dGhost, dCoin, dScoreboard]
+    pictures $ dMap ++ [dPlayer] ++ [dGhost] ++ [dCoin] ++ [dScoreboard]
     where
         dMap = Map.drawMapa assets cellSize width mapa (0, 0)
         dPlayer = Player.drawPlayer assets cellSize player
@@ -36,6 +36,17 @@ updateGame dt (cellSize, width, height, mapa, assets, player, ghost, coin, score
 
 
 inputHandler :: Event -> Game -> Game
-inputHandler event (cellSize, width, mapa, assets, player, ghost) = (cellSize, width, mapa, assets, iPlayer, ghost)
+inputHandler event (cellSize, width, height, mapa, assets, player, ghost, coin, score) = 
+    (
+        cellSize, 
+        width, 
+        height, 
+        mapa, 
+        assets, 
+        iPlayer, 
+        ghost, 
+        coin, 
+        score
+    )
     where
         iPlayer = Player.inputPlayer event player
