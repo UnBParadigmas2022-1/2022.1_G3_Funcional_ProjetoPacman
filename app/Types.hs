@@ -8,6 +8,7 @@ import System.Random
 type CellSize = Float
 type Width    = Float
 type Height   = Float
+type MultValor = (Point, Point)
 
 type Cell = Float
 type Mapa = [Cell]
