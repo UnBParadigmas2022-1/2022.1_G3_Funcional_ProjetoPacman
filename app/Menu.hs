@@ -25,10 +25,10 @@ drawAlgorithms _ [] = []
 drawAlgorithms height (h:t) = translate 100 height (text h) : drawAlgorithms (height-150) t
 
 
--- Update
+-- Input
 menuInputHandler :: Event -> Game -> Game
-menuInputHandler (EventKey (Char 'a') Down _ _) (cellSize, width, mapa, assets, ghost, state, algo) = (cellSize, width, mapa, assets, ghost, GAME, ASTAR)
-menuInputHandler (EventKey (Char 'b') Down _ _) (cellSize, width, mapa, assets, ghost, state, algo) = (cellSize, width, mapa, assets, ghost, GAME, BFS)
-menuInputHandler (EventKey (Char 'd') Down _ _) (cellSize, width, mapa, assets, ghost, state, algo) = (cellSize, width, mapa, assets, ghost, GAME, DFS)
-menuInputHandler (EventKey (Char 'k') Down _ _) (cellSize, width, mapa, assets, ghost, state, algo) = (cellSize, width, mapa, assets, ghost, GAME, DJK)
+menuInputHandler (EventKey (Char 'a') Down _ _) (cellSize, width, mapa, assets, player, ghost, state, algo) = (cellSize, width, mapa, assets, player, ghost, GAME, ASTAR)
+menuInputHandler (EventKey (Char 'b') Down _ _) (cellSize, width, mapa, assets, player, ghost, state, algo) = (cellSize, width, mapa, assets, player, ghost, GAME, BFS)
+menuInputHandler (EventKey (Char 'd') Down _ _) (cellSize, width, mapa, assets, player, ghost, state, algo) = (cellSize, width, mapa, assets, player, ghost, GAME, DFS)
+menuInputHandler (EventKey (Char 'k') Down _ _) (cellSize, width, mapa, assets, player, ghost, state, algo) = (cellSize, width, mapa, assets, player, ghost, GAME, DJK)
 menuInputHandler _ g = g

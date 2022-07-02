@@ -6,9 +6,11 @@ import Data.List
 
 type CellSize = Float
 type Width    = Float
+type MultValor = (Point, Point)
 
 type Cell = Float
 type Mapa = [Cell]
+type Player = (Point, Point)
 type Ghost = (Float, Float)
 
 type Assets = [Picture]
@@ -26,4 +28,4 @@ data Algorithm =
     | ASTAR
     deriving(Enum, Ord, Eq)
 
-type Game = (CellSize, Width, Mapa, Assets, Ghost, State, Algorithm)
+type Game = (CellSize, Width, Mapa, Assets, Player, Ghost, State, Algorithm)
