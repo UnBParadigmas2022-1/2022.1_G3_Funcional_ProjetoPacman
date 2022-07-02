@@ -20,7 +20,7 @@ updateGame :: Float -> Game -> Game
 updateGame dt (cellSize, width, mapa, assets, player, ghost) = (cellSize, width, mapa, assets, uPlayer, uGhost)
     where
         uPlayer = Player.updatePlayer player
-        uGhost = Ghost.updateGhost ghost
+        uGhost = Ghost.updateGhost ghost player
 
 inputHandler :: Event -> Game -> Game
 inputHandler event (cellSize, width, mapa, assets, player, ghost) = (cellSize, width, mapa, assets, iPlayer, ghost)
