@@ -36,6 +36,7 @@ main = do
 drawingFunc :: Game -> Picture
 drawingFunc (cellSize, width, height, mapa, assets, player, ghosts, coin, score, GAME) =
     translate Startup.startX Startup.startY (drawGame (cellSize, width, height, mapa, assets, player, ghosts, coin, score, GAME))
+drawingFunc (cellSize, width, height, mapa, assets, player, ghosts, coin, score, END) = drawEnd width score
 drawingFunc (cellSize, width, height, mapa, assets, player, ghosts, coin, score, state) = drawMenu width title state
 
 
@@ -48,5 +49,7 @@ updateFunc dt game = game
 inputHandler :: Event -> Game -> Game
 inputHandler event (cellSize, width, height, mapa, assets, player, ghosts, coin, score, GAME) =
     gameInputHandler event (cellSize, width, height, mapa, assets, player, ghosts, coin, score, GAME)
+inputHandler event (cellSize, width, height, mapa, assets, player, ghosts, coin, score, END) =
+    endInputHandler event (cellSize, width, height, mapa, assets, player, ghosts, coin, score, END)
 inputHandler event (cellSize, width, height, mapa, assets, player, ghosts, coin, score, state) =
     menuInputHandler event (cellSize, width, height, mapa, assets, player, ghosts, coin, score, state)
