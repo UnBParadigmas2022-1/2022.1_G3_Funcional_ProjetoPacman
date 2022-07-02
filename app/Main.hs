@@ -7,6 +7,7 @@ import Startup
 import Game
 import Types
 import Menu
+import End
 
 window :: Display
 window = (InWindow title (iwidth, iheight) (0, 0))
@@ -32,13 +33,16 @@ main = do
 
 drawingFunc :: Game -> Picture
 drawingFunc (cellSize, width, mapa, assets, player, ghosts, GAME)  = translate Startup.startX Startup.startY (drawGame (cellSize, width, mapa, assets, player, ghosts, GAME))
+drawingFunc (cellSize, width, mapa, assets, player, ghost, END) = drawEnd width
 drawingFunc (cellSize, width, mapa, assets, player, ghosts, state) = drawMenu width title state
+
 
 updateFunc :: Float -> Game -> Game
 updateFunc dt (cellSize, width, mapa, assets, player, ghosts, GAME) = Game.updateGame dt (cellSize, width, mapa, assets, player, ghosts, GAME) 
 updateFunc dt game = game
 
+
 inputHandler :: Event -> Game -> Game
 inputHandler event (cellSize, width, mapa, assets, player, ghosts, GAME) = gameInputHandler event (cellSize, width, mapa, assets, player, ghosts, GAME)
+inputHandler event (cellSize, width, mapa, assets, player, ghosts, END)  = endInputHandler event (cellSize, width, mapa, assets, player, ghosts, END) 
 inputHandler event (cellSize, width, mapa, assets, player, ghosts, state) = menuInputHandler event (cellSize, width, mapa, assets, player, ghosts, state)
-
