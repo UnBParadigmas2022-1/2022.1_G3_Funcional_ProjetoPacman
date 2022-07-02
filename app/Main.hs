@@ -19,7 +19,7 @@ player      = ((13, 17), (1, 0))     :: Player
 startX = (cellSize - width)  / 2.0
 startY = (height - cellSize) / 2.0
 
-assetsName = ["wall", "gold", "diamond", "nether", "orange-ghost"]
+assetsName = ["wall", "gold", "diamond", "nether", "player", "orange-ghost"]
 
 
 window :: Display

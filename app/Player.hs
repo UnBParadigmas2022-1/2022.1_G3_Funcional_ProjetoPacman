@@ -4,12 +4,12 @@ import Graphics.Gloss
 import Graphics.Gloss.Interface.Pure.Game
 
 import Map
-import Types (CellSize, Player, Game)
+import Types (Assets, CellSize, Player, Game)
 
 
-drawPlayer :: CellSize -> Player -> Picture
-drawPlayer cellSize ((x, y), (_, _)) =
-    (translate (cellSize*x) (-cellSize*y) $ color white $ rectangleSolid cellSize cellSize)
+drawPlayer :: Assets -> CellSize -> Player -> Picture
+drawPlayer [_, _, _, _, player, _] cellSize ((x, y), (_, _)) =
+    translate (cellSize*x) (-cellSize*y) $ player
 
 updatePlayer :: Player -> Player
 updatePlayer ((x, y), (sx, sy))

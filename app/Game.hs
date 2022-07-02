@@ -10,9 +10,10 @@ import Ghost
 
 
 drawGame :: Game -> Picture
-drawGame (cellSize, width, mapa, assets, player, ghost) = pictures $ (Map.drawMapa assets cellSize width mapa (0, 0)) ++ [dPlayer] ++ [dGhost]
+drawGame (cellSize, width, mapa, assets, player, ghost) = pictures $ dMap ++ [dPlayer] ++ [dGhost]
     where
-        dPlayer = Player.drawPlayer cellSize player
+        dMap = (Map.drawMapa assets cellSize width mapa (0, 0))
+        dPlayer = Player.drawPlayer assets cellSize player
         dGhost = Ghost.drawGhost assets cellSize ghost
 
 updateGame :: Float -> Game -> Game
