@@ -12,15 +12,15 @@ title  = "Pacman"
 
 fps = 5
 
-cellSize    = 25                            :: CellSize
-width       = mapaWidth*cellSize            :: Width
-height      = (mapaHeight + 2)*cellSize     :: Height
+cellSize    = 25                     :: CellSize
+width       = mapaWidth*cellSize     :: Width
+height      = mapaHeight*cellSize    :: Height
+player      = ((13, 17), (1, 0))     :: Player
 
 startX = (cellSize - width)  / 2.0
 startY = (height - cellSize) / 2.0
 
-assetsName = ["wall", "gold", "diamond", "nether", "orange-ghost", "coin"]
-
+assetsName = ["wall", "gold", "diamond", "nether", "player", "orange-ghost", "coin"]
 
 background = black
 
@@ -36,7 +36,7 @@ main :: IO ()
 main = do
     assets <- loadAssets
     let coinSeed = mkStdGen 777
-    let game = (cellSize, width, height, Map.mapaAtual, assets, (1,-1), ((13, -11), coinSeed), 0) :: Game
+    let game = (cellSize, width, height, Map.mapaAtual, assets, player, (1,-1), ((13, -11), coinSeed), 0) :: Game
 
     play
         window
