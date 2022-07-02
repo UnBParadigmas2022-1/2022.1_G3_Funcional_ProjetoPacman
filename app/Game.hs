@@ -25,13 +25,18 @@ drawGame (cellSize, width, height, mapa, assets, player, ghosts, coin, score, st
 
 updateGame :: Float -> Game -> Game
 updateGame dt (cellSize, width, height, mapa, assets, player, ghosts, coin, score, state) = 
-    (cellSize, width, height, mapa, assets, uPlayer, uGhost, uCoin, uScore, state)
+    (cellSize, width, height, mapa, assets, uPlayer, uGhosts, uCoin, uScore, uState)
     where
         uPlayer = Player.updatePlayer player
-        uGhost = Ghost.updateGhosts ghosts player
-        uScore = (score+1) `mod` 10
+        uGhosts = Ghost.updateGhosts ghosts player
+        coinCollision = hasCollision uPlayer [fst coin]
+        uScore = score + 1 + coinPrice coinCollision
+        uGhostsPositions = map (\(x, y, _, _) -> (x, y)) uGhosts
+        uState
+            | hasCollision player uGhostsPositions = END
+            | otherwise = GAME
         uCoin
-            | uScore == 0 = Coin.updateCoin coin
+            | coinCollision = Coin.updateCoin coin
             | otherwise = coin
 
 

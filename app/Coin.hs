@@ -15,6 +15,9 @@ drawCoin cellSize [_, _, _, _, _, _, coin] ((x, y), _) =
         newX = x * cellSize
         newY = y * cellSize
 
+coinPrice :: Bool -> Int
+coinPrice True = 10
+coinPrice False = 0
 
 generateRandom :: StdGen -> (Int, Int) -> (Int, StdGen)
 generateRandom seed range = uniformR range seed
