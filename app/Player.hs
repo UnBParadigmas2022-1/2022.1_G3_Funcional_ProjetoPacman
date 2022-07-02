@@ -34,3 +34,6 @@ movePlayer :: Point -> Player -> Player
 movePlayer (nsx, nsy) ((x, y), (sx, sy))
     | Map.isWallCell (x+nsx, y+nsy) = ((x, y), (sx, sy))
     | otherwise = ((x, y), (nsx, nsy))
+
+hasCollision :: Player -> [Point] -> Bool
+hasCollision (posPlayer, _) points = any (\(x, y) -> posPlayer == (x, abs y)) points

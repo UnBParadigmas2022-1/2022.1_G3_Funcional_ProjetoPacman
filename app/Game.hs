@@ -20,10 +20,14 @@ drawGame (cellSize, width, mapa, assets, player, ghosts, state) =
 
 updateGame :: Float -> Game -> Game
 updateGame dt (cellSize, width, mapa, assets, player, ghosts, state) =
-    (cellSize, width, mapa, assets, uPlayer, uGhost, state)
+    (cellSize, width, mapa, assets, uPlayer, uGhosts, uState)
     where
         uPlayer = Player.updatePlayer player
-        uGhost = Ghost.updateGhosts ghosts player
+        uGhosts = Ghost.updateGhosts ghosts player
+        uGhostsPositions = map (\(x, y, _, _) -> (x, y)) uGhosts
+        uState
+            | hasCollision player uGhostsPositions = END
+            | otherwise = GAME
 
 
 gameInputHandler :: Event -> Game -> Game

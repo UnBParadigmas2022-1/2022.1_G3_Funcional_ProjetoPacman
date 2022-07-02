@@ -33,7 +33,7 @@ main = do
 
 drawingFunc :: Game -> Picture
 drawingFunc (cellSize, width, mapa, assets, player, ghosts, GAME)  = translate Startup.startX Startup.startY (drawGame (cellSize, width, mapa, assets, player, ghosts, GAME))
-drawingFunc (cellSize, width, mapa, assets, player, ghost, END) = drawEnd width
+drawingFunc (cellSize, width, mapa, assets, player, ghosts, END) = drawEnd width
 drawingFunc (cellSize, width, mapa, assets, player, ghosts, state) = drawMenu width title state
 
 
