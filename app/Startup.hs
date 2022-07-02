@@ -15,8 +15,10 @@ width       = Map.mapaWidth*cellSize    :: Width
 height      = Map.mapaHeight*cellSize   :: Float
 background  = black                     :: Color
 
-player      = ((13, 17), (1, 0))        :: Player
-ghost       = (1, -1, BFS)              :: Ghost
+player      = ((13, 17), (1, 0))     :: Player
+ghost       = (1, -1, -1, ASTAR)            :: Ghost
+ghosts      = [(1, -1, -1, ASTAR), (26, -1, -1, BFS)] :: Ghosts
+
 
 
 startX = (cellSize - width)  / 2.0
@@ -26,11 +28,11 @@ assetsName = ["wall", "gold", "diamond", "nether", "player", "orange-ghost"]
 
 
 loadGame :: Assets -> State -> GameMode -> Algorithm -> Game
-loadGame assets state HARD _ = (cellSize, width, Map.mapaAtual, assets, player, ghost, state)
-loadGame assets state SOLO algo  = (cellSize, width, Map.mapaAtual, assets, player, newGhost, state)
+loadGame assets state HARD _ = (cellSize, width, Map.mapaAtual, assets, player, ghosts, state)
+loadGame assets state SOLO algo  = (cellSize, width, Map.mapaAtual, assets, player, [newGhost], state)
     where
-        (gx, gy, _) = ghost
-        newGhost = (gx, gy, algo)
+        (gx, gy, s, _) = ghost
+        newGhost = (gx, gy, s, algo)
 
 
 loadAssets :: IO [Picture]

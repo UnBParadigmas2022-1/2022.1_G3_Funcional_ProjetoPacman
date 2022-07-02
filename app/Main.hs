@@ -31,14 +31,14 @@ main = do
 
 
 drawingFunc :: Game -> Picture
-drawingFunc (cellSize, width, mapa, assets, player, ghost, GAME)  = translate Startup.startX Startup.startY (drawGame (cellSize, width, mapa, assets, player, ghost, GAME))
-drawingFunc (cellSize, width, mapa, assets, player, ghost, state) = drawMenu width title state
+drawingFunc (cellSize, width, mapa, assets, player, ghosts, GAME)  = translate Startup.startX Startup.startY (drawGame (cellSize, width, mapa, assets, player, ghosts, GAME))
+drawingFunc (cellSize, width, mapa, assets, player, ghosts, state) = drawMenu width title state
 
 updateFunc :: Float -> Game -> Game
-updateFunc dt (cellSize, width, mapa, assets, player, ghost, GAME) = Game.updateGame dt (cellSize, width, mapa, assets, player, ghost, GAME) 
+updateFunc dt (cellSize, width, mapa, assets, player, ghosts, GAME) = Game.updateGame dt (cellSize, width, mapa, assets, player, ghosts, GAME) 
 updateFunc dt game = game
 
 inputHandler :: Event -> Game -> Game
-inputHandler event (cellSize, width, mapa, assets, player, ghost, GAME) = gameInputHandler event (cellSize, width, mapa, assets, player, ghost, GAME)
-inputHandler event (cellSize, width, mapa, assets, player, ghost, state) = menuInputHandler event (cellSize, width, mapa, assets, player, ghost, state)
+inputHandler event (cellSize, width, mapa, assets, player, ghosts, GAME) = gameInputHandler event (cellSize, width, mapa, assets, player, ghosts, GAME)
+inputHandler event (cellSize, width, mapa, assets, player, ghosts, state) = menuInputHandler event (cellSize, width, mapa, assets, player, ghosts, state)
 
