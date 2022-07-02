@@ -31,7 +31,7 @@ executable x20221-G3-Funcional-ProjetoPacman
         AEstrela, Game, Map,
         Types, Player, Coin, Ghost,
         Scoreboard, Menu, Bfs, Startup,
-        Menu, Bfs, Startup, End
+        Menu, Bfs, Startup, End, Djikstra
 
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:
