@@ -52,9 +52,9 @@ mapaAtual = [
 imageCell :: Cell -> Assets -> CellSize -> Picture
 imageCell 0 (wall:_) _ = wall
 imageCell 1 _ cellSize = color black $ rectangleSolid cellSize cellSize
-imageCell 2 [_, gold, _, _, _] _    = gold
-imageCell 3 [_, _, diamond, _, _] _ = diamond
-imageCell 4 [_, _, _, nether, _] _  = nether
+imageCell 2 [_, gold, _, _, _, _] _    = gold
+imageCell 3 [_, _, diamond, _, _, _] _ = diamond
+imageCell 4 [_, _, _, nether, _, _] _  = nether
 
 drawMapaCell :: Assets -> CellSize -> Float -> Float -> Cell -> Picture
 drawMapaCell assets cellSize x y cell = translate x y $ imageCell cell assets cellSize
@@ -111,3 +111,6 @@ next ((f,p):t) initial previous
     | f == previous = next t initial p
     | otherwise = next t initial previous
 
+isTunnel :: Point -> Bool
+isTunnel (x, y) = not (isWallCell (x, y))
+    && (x == mapaWidth-1 || y == mapaHeight-1 || x == 0 || y == 0 )

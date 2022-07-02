@@ -9,6 +9,8 @@ import Types
 
 type Valor = (Int, MultValor)
 
+
+aStar :: Point -> Point -> Point
 aStar initialPos goalPos = nextPos
     where
         actualMap = mapaAtual
