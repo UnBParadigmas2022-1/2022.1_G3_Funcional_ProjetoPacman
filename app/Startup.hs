@@ -20,7 +20,7 @@ background  = black                     :: Color
 
 player      = ((13, 17), (1, 0))     :: Player
 ghost       = (1, -1, -1, ASTAR)            :: Ghost
-ghosts      = [(1, -1, -1, ASTAR), (26, -1, -1, BFS)] :: Ghosts
+ghosts      = [(1, -1, -1, ASTAR), (26, -1, -1, BFS), (26, -29, -1, DJK)] :: Ghosts
 coins       = (13, -11)
 score       = 0
 

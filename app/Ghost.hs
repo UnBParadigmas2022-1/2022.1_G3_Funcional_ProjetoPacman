@@ -5,6 +5,7 @@ import Graphics.Gloss
 import Types
 import AEstrela
 import Bfs
+import Djikstra
 import Map
 
 
@@ -20,6 +21,7 @@ updateGhost ((px, py), (_, _)) (x,y, slow, algo) = (newX, -newY, slow, algo)
         (newX, newY)
             | algo == ASTAR = AEstrela.aStar point (px, py)
             | algo == BFS = Bfs.bShortestPath point (px, py)
+            | algo == DJK = Djikstra.djikstraPath point (px, py)
             | otherwise = AEstrela.aStar point (px, py)
 
 

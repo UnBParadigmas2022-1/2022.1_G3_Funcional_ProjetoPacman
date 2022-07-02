@@ -25,4 +25,6 @@ drawTexts (texto:calda) height = (translate 50 height $ text texto) : drawTexts 
 endInputHandler :: Event -> Game -> Game
 endInputHandler (EventKey (Char 'm') Down _ _) (cellSize, width, height, mapa, assets, player, ghosts, coin, score, state) =
     (cellSize, width, height, mapa, assets, player, ghosts, coin, score, MENU)
+endInputHandler (EventKey (Char 'M') Up _ _) (cellSize, width, height, mapa, assets, player, ghosts, coin, score, state) =
+    (cellSize, width, height, mapa, assets, player, ghosts, coin, score, MENU)
 endInputHandler _ g = g
