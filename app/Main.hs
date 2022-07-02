@@ -18,7 +18,7 @@ window = (InWindow title (iwidth, iheight) (0, 0))
 main :: IO ()
 main = do
     assets <- Startup.loadAssets
-    let game = Startup.loadGame assets MENU SOLO
+    let game = Startup.loadGame assets MENU SOLO DFS
 
     play
         window
@@ -31,14 +31,14 @@ main = do
 
 
 drawingFunc :: Game -> Picture
-drawingFunc (cellSize, width, mapa, assets, player, ghost, GAME, algo)  = translate Startup.startX Startup.startY (drawGame (cellSize, width, mapa, assets, player, ghost, GAME, algo))
-drawingFunc (cellSize, width, mapa, assets, player, ghost, state, algo) = drawMenu width title state
+drawingFunc (cellSize, width, mapa, assets, player, ghost, GAME)  = translate Startup.startX Startup.startY (drawGame (cellSize, width, mapa, assets, player, ghost, GAME))
+drawingFunc (cellSize, width, mapa, assets, player, ghost, state) = drawMenu width title state
 
 updateFunc :: Float -> Game -> Game
-updateFunc dt (cellSize, width, mapa, assets, player, ghost, GAME, algo) = Game.updateGame dt (cellSize, width, mapa, assets, player, ghost, GAME, algo) 
+updateFunc dt (cellSize, width, mapa, assets, player, ghost, GAME) = Game.updateGame dt (cellSize, width, mapa, assets, player, ghost, GAME) 
 updateFunc dt game = game
 
 inputHandler :: Event -> Game -> Game
-inputHandler event (cellSize, width, mapa, assets, player, ghost, GAME, algo) = gameInputHandler event (cellSize, width, mapa, assets, player, ghost, GAME, algo)
-inputHandler event (cellSize, width, mapa, assets, player, ghost, state, algo) = menuInputHandler event (cellSize, width, mapa, assets, player, ghost, state, algo)
+inputHandler event (cellSize, width, mapa, assets, player, ghost, GAME) = gameInputHandler event (cellSize, width, mapa, assets, player, ghost, GAME)
+inputHandler event (cellSize, width, mapa, assets, player, ghost, state) = menuInputHandler event (cellSize, width, mapa, assets, player, ghost, state)
 

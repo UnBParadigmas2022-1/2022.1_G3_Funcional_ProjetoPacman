@@ -10,7 +10,7 @@ import Ghost
 
 
 drawGame :: Game -> Picture
-drawGame (cellSize, width, mapa, assets, player, ghost, state, algo) = pictures $ dMap ++ [dPlayer] ++ [dGhost]
+drawGame (cellSize, width, mapa, assets, player, ghost, state) = pictures $ dMap ++ [dPlayer] ++ [dGhost]
     where
         dMap = (Map.drawMapa assets cellSize width mapa (0, 0))
         dPlayer = Player.drawPlayer assets cellSize player
@@ -18,15 +18,15 @@ drawGame (cellSize, width, mapa, assets, player, ghost, state, algo) = pictures 
 
 
 updateGame :: Float -> Game -> Game
-updateGame dt (cellSize, width, mapa, assets, player, ghost, state, algo) =
-    (cellSize, width, mapa, assets, uPlayer, uGhost, state, algo)
+updateGame dt (cellSize, width, mapa, assets, player, ghost, state) =
+    (cellSize, width, mapa, assets, uPlayer, uGhost, state)
     where
         uPlayer = Player.updatePlayer player
-        uGhost = Ghost.updateGhost ghost player algo
+        uGhost = Ghost.updateGhost ghost player
 
 
 gameInputHandler :: Event -> Game -> Game
-gameInputHandler event (cellSize, width, mapa, assets, player, ghost, state, algo) = 
-    (cellSize, width, mapa, assets, iPlayer, ghost, state, algo)
+gameInputHandler event (cellSize, width, mapa, assets, player, ghost, state) = 
+    (cellSize, width, mapa, assets, iPlayer, ghost, state)
     where
         iPlayer = Player.inputPlayer event player

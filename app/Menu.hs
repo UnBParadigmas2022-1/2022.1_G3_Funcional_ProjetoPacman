@@ -34,11 +34,11 @@ drawOptions height (h:t) = translate 100 height (text h) : drawOptions (height-1
 
 -- Input
 menuInputHandler :: Event -> Game -> Game
-menuInputHandler event (cellSize, width, mapa, assets, player, ghost, state, algo) =
+menuInputHandler event (cellSize, width, mapa, assets, player, ghost, state) =
     newGame
     where
         (newState, newAlgo, gameMode) = menuEventHandler event state
-        newGame = Startup.loadGame assets newState gameMode
+        newGame = Startup.loadGame assets newState gameMode newAlgo
          
 
 menuEventHandler :: Event -> State -> (State, Algorithm, GameMode)
