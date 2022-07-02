@@ -14,11 +14,12 @@ fps = 5
 cellSize    = 25                     :: CellSize
 width       = mapaWidth*cellSize     :: Width
 height      = mapaHeight*cellSize    :: Float
+player      = ((13, 17), (1, 0))     :: Player
 
 startX = (cellSize - width)  / 2.0
 startY = (height - cellSize) / 2.0
 
-assetsName = ["wall", "gold", "diamond", "nether", "orange-ghost"]
+assetsName = ["wall", "gold", "diamond", "nether", "player", "orange-ghost"]
 
 
 window :: Display
@@ -31,7 +32,7 @@ window = (InWindow title (iwidth, iheight) (0, 0))
 main :: IO ()
 main = do
     assets <- loadAssets
-    let game = (cellSize, width, Map.mapaAtual, assets, (1,-1)) :: Game
+    let game = (cellSize, width, Map.mapaAtual, assets, player, (1,-1)) :: Game
 
     play
         window
