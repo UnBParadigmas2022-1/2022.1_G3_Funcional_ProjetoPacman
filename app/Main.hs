@@ -20,8 +20,7 @@ main :: IO ()
 main = do
     assets <- Startup.loadAssets
     let coinSeed = mkStdGen 777
-    let game = Startup.loadGame assets MENU SOLO DFS
-    -- let game = (cellSize, width, height, Map.mapaAtual, assets, player, (1,-1), ((13, -11), coinSeed), 0) :: Game
+    let game = Startup.loadGame assets MENU SOLO DFS coinSeed
 
     play
         window
@@ -34,14 +33,14 @@ main = do
 
 
 drawingFunc :: Game -> Picture
-drawingFunc (cellSize, width, mapa, assets, player, ghosts, GAME)  = translate Startup.startX Startup.startY (drawGame (cellSize, width, mapa, assets, player, ghosts, GAME))
-drawingFunc (cellSize, width, mapa, assets, player, ghosts, state) = drawMenu width title state
+drawingFunc (cellSize, width, height, mapa, assets, player, ghosts, coin, score, GAME)  = translate Startup.startX Startup.startY (drawGame (cellSize, width, height, mapa, assets, player, ghosts, coin, score, GAME))
+drawingFunc (cellSize, width, height, mapa, assets, player, ghosts, coin, score, state) = drawMenu width title state
 
 updateFunc :: Float -> Game -> Game
-updateFunc dt (cellSize, width, mapa, assets, player, ghosts, GAME) = Game.updateGame dt (cellSize, width, mapa, assets, player, ghosts, GAME) 
+updateFunc dt (cellSize, width, height, mapa, assets, player, ghosts, coin, score, GAME) = Game.updateGame dt (cellSize, width, height, mapa, assets, player, ghosts, coin, score, GAME) 
 updateFunc dt game = game
 
 inputHandler :: Event -> Game -> Game
-inputHandler event (cellSize, width, mapa, assets, player, ghosts, GAME) = gameInputHandler event (cellSize, width, mapa, assets, player, ghosts, GAME)
-inputHandler event (cellSize, width, mapa, assets, player, ghosts, state) = menuInputHandler event (cellSize, width, mapa, assets, player, ghosts, state)
+inputHandler event (cellSize, width, height, mapa, assets, player, ghosts, coin, score, GAME) = gameInputHandler event (cellSize, width, height, mapa, assets, player, ghosts, coin, score, GAME)
+inputHandler event (cellSize, width, height, mapa, assets, player, ghosts, coin, score, state) = menuInputHandler event (cellSize, width, height, mapa, assets, player, ghosts, coin, score, state)
 

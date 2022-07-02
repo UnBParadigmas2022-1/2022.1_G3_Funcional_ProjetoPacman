@@ -35,19 +35,8 @@ updateGame dt (cellSize, width, height, mapa, assets, player, ghosts, coin, scor
             | otherwise = coin
 
 
-inputHandler :: Event -> Game -> Game
-inputHandler event (cellSize, width, height, mapa, assets, player, ghost, coin, score, state) = 
-    (
-        cellSize, 
-        width, 
-        height, 
-        mapa, 
-        assets, 
-        iPlayer, 
-        ghost, 
-        coin, 
-        score,
-        state
-    )
+gameInputHandler :: Event -> Game -> Game
+gameInputHandler event (cellSize, width, height, mapa, assets, player, ghosts, coin, score, state) = 
+    (cellSize, width, height, mapa, assets, iPlayer, ghosts, coin, score, state)
     where
         iPlayer = Player.inputPlayer event player

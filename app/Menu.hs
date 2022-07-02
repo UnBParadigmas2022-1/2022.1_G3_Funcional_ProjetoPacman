@@ -3,6 +3,8 @@ module Menu where
 import Graphics.Gloss
 import Graphics.Gloss.Interface.Pure.Game
 
+import System.Random
+
 import Types
 import Startup
 
@@ -34,11 +36,12 @@ drawOptions height (h:t) = translate 100 height (text h) : drawOptions (height-1
 
 -- Input
 menuInputHandler :: Event -> Game -> Game
-menuInputHandler event (cellSize, width, mapa, assets, player, ghost, state) =
+menuInputHandler event (cellSize, width, height, mapa, assets, player, ghosts, coin, score, state) =
     newGame
     where
+        coinSeed = mkStdGen 777
         (newState, newAlgo, gameMode) = menuEventHandler event state
-        newGame = Startup.loadGame assets newState gameMode newAlgo
+        newGame = Startup.loadGame assets newState gameMode newAlgo coinSeed
          
 
 menuEventHandler :: Event -> State -> (State, Algorithm, GameMode)
