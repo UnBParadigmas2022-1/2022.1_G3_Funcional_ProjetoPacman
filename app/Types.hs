@@ -6,9 +6,12 @@ import Data.List
 
 type CellSize = Float
 type Width    = Float
+type MultValor = (Point, Point)
 
 type Cell = Float
 type Mapa = [Cell]
+
+type Player = (Point, Point)
 
 type Slow = Float
 type Ghost = (Float, Float, Float)
@@ -16,4 +19,4 @@ type Ghosts = [Ghost]
 
 type Assets = [Picture]
 
-type Game = (CellSize, Width, Mapa, Assets, Ghosts)
+type Game = (CellSize, Width, Mapa, Assets, Player, Ghosts)

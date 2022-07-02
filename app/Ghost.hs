@@ -1,33 +1,35 @@
 module Ghost where
 
 import Graphics.Gloss
+
 import Types
 import AEstrela
 import Map
 
 drawGhost :: Assets -> Float -> Ghost -> Picture
-drawGhost [_, _, _, _, orangeGhost] cellSize (x,y, _)= color yellow $ translate (cellSize*x) (cellSize*(y)) $ orangeGhost
+drawGhost [_, _, _, _, _, orangeGhost] cellSize (x,y, _) =
+    translate (cellSize*x) (cellSize*y) orangeGhost
 
-updateGhost :: Ghost -> Ghost
-updateGhost (x, y, slow) = (newX, -newY, slow)
+
+updateGhost :: Player -> Ghost -> Ghost
+updateGhost ((px, py), (_, _)) (x, y, slow) = (newX, -newY, slow)
     where
-        (newX, newY) = AEstrela.aStar (x,abs(y)) (26,29)
+        (newX, newY) = AEstrela.aStar (x,abs y) (px, abs py)
+
 
 drawGhosts :: Ghosts -> Assets -> CellSize -> Picture 
-drawGhosts ghosts assets cellsize = pictures (map (drawGhost assets cellsize) ghosts)
+drawGhosts ghosts assets cellsize = pictures $ map (drawGhost assets cellsize) ghosts
 
-updateGhosts :: Ghosts -> Ghosts
-updateGhosts ghosts = map (updateGhostSlow) ghosts
 
-getSlow 2 = 3
-getSlow 3 = 7
-getSlow 4 = 10
-getSlow 5 = 13
+updateGhosts :: Ghosts -> Player -> Ghosts
+updateGhosts ghosts player = map (updateGhostSlow player) ghosts
 
-updateGhostSlow (x, y, slow)
-    | actualValue == 1, slow == 0  = Ghost.updateGhost (x, y, -1)
-    | actualValue > 1, slow < 0 = (x, y, getSlow actualValue)
+
+updateGhostSlow :: Player -> Ghost -> Ghost
+updateGhostSlow player (x, y, slow)
+    | actualValue == 1, slow == 0  = Ghost.updateGhost player (x, y, -1)
+    | actualValue > 1, slow < 0 = (x, y, actualValue)
     | slow > 0 = (x, y, slow - 1)
-    | otherwise = Ghost.updateGhost (x, y, slow)
+    | otherwise = Ghost.updateGhost player (x, y, slow)
     where   
         actualValue = getCellValue(x,y)
