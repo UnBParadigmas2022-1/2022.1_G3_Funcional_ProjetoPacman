@@ -25,11 +25,9 @@ startY = (height - cellSize) / 2.0
 assetsName = ["wall", "gold", "diamond", "nether", "player", "orange-ghost"]
 
 
-loadGameSolo :: Assets -> Game
-loadGameSolo assets = (cellSize, width, Map.mapaAtual, assets, player, ghost, MENU, ASTAR)
-
-loadGameHard :: Assets -> Game
-loadGameHard assets = (cellSize, width, Map.mapaAtual, assets, player, ghost, MENU, ASTAR)
+loadGame :: Assets -> State -> GameMode -> Game
+loadGame assets state SOLO = (cellSize, width, Map.mapaAtual, assets, player, ghost, state, ASTAR)
+loadGame assets state HARD = (cellSize, width, Map.mapaAtual, assets, player, ghost, state, ASTAR)
 
 
 loadAssets :: IO [Picture]

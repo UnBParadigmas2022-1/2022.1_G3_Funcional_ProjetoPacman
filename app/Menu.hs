@@ -4,6 +4,7 @@ import Graphics.Gloss
 import Graphics.Gloss.Interface.Pure.Game
 
 import Types
+import Startup
 
 
 -- Draw
@@ -34,15 +35,17 @@ drawOptions height (h:t) = translate 100 height (text h) : drawOptions (height-1
 -- Input
 menuInputHandler :: Event -> Game -> Game
 menuInputHandler event (cellSize, width, mapa, assets, player, ghost, state, algo) =
-    (cellSize, width, mapa, assets, player, ghost, iState, iAlgo)
+    newGame
     where
-        (iState, iAlgo) = menuEventHandler event state algo
+        (newState, newAlgo, gameMode) = menuEventHandler event state
+        newGame = Startup.loadGame assets newState gameMode
+         
 
-menuEventHandler :: Event -> State -> Algorithm -> (State, Algorithm)
-menuEventHandler (EventKey (Char '1') Down _ _) MENU algo = (MENU_SOLO, algo)
-menuEventHandler (EventKey (Char '2') Down _ _) MENU algo = (GAME, algo)
-menuEventHandler (EventKey (Char 'a') Down _ _) MENU_SOLO _ = (GAME, ASTAR)
-menuEventHandler (EventKey (Char 'b') Down _ _) MENU_SOLO _ = (GAME, BFS)
-menuEventHandler (EventKey (Char 'd') Down _ _) MENU_SOLO _ = (GAME, DFS)
-menuEventHandler (EventKey (Char 'k') Down _ _) MENU_SOLO _ = (GAME, DJK)
-menuEventHandler _ s a = (s, a)
+menuEventHandler :: Event -> State -> (State, Algorithm, GameMode)
+menuEventHandler (EventKey (Char '1') Down _ _) MENU = (MENU_SOLO, BFS, SOLO)
+menuEventHandler (EventKey (Char '2') Down _ _) MENU = (GAME, BFS, HARD)
+menuEventHandler (EventKey (Char 'a') Down _ _) MENU_SOLO = (GAME, ASTAR, SOLO)
+menuEventHandler (EventKey (Char 'b') Down _ _) MENU_SOLO = (GAME, BFS, SOLO)
+menuEventHandler (EventKey (Char 'd') Down _ _) MENU_SOLO = (GAME, DFS, SOLO)
+menuEventHandler (EventKey (Char 'k') Down _ _) MENU_SOLO = (GAME, DJK, SOLO)
+menuEventHandler _ s = (s, BFS, SOLO)

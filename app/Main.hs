@@ -18,7 +18,7 @@ window = (InWindow title (iwidth, iheight) (0, 0))
 main :: IO ()
 main = do
     assets <- Startup.loadAssets
-    let game = Startup.loadGameSolo assets
+    let game = Startup.loadGame assets MENU SOLO
 
     play
         window

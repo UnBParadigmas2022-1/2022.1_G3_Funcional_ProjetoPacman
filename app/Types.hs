@@ -29,4 +29,9 @@ data Algorithm =
     | ASTAR
     deriving(Enum, Ord, Eq)
 
+data GameMode =
+     SOLO
+    | HARD
+    deriving(Enum, Ord, Eq)
+
 type Game = (CellSize, Width, Mapa, Assets, Player, Ghost, State, Algorithm)
