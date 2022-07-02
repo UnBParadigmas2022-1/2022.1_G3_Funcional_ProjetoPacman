@@ -14,7 +14,7 @@ fps = 5
 cellSize    = 25                     :: CellSize
 width       = mapaWidth*cellSize     :: Width
 height      = mapaHeight*cellSize    :: Float
-player      = ((13, 17), (1, 0))     :: Player
+player      = ((13, 17), (1, 0), 0)     :: Player
 
 startX = (cellSize - width)  / 2.0
 startY = (height - cellSize) / 2.0
