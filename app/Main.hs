@@ -4,54 +4,44 @@ import Graphics.Gloss
 import Graphics.Gloss.Interface.Pure.Game
 import System.Random
 
+import Startup
 import Game
 import Types
-import Map
-
-title  = "Pacman"
-
-fps = 5
-
-cellSize    = 25                     :: CellSize
-width       = mapaWidth*cellSize     :: Width
-height      = mapaHeight*cellSize    :: Height
-player      = ((13, 17), (1, 0))     :: Player
-
-startX = (cellSize - width)  / 2.0
-startY = (height - cellSize) / 2.0
-
-assetsName = ["wall", "gold", "diamond", "nether", "player", "orange-ghost", "coin"]
-
-background = black
-
+import Menu
 
 window :: Display
 window = InWindow title (iwidth, iheight) (0, 0)
     where
-        iwidth  = round width
-        iheight = round height
+        iwidth  = round Startup.width
+        iheight = round Startup.height
 
 
 main :: IO ()
 main = do
-    assets <- loadAssets
+    assets <- Startup.loadAssets
     let coinSeed = mkStdGen 777
-    let game = (cellSize, width, height, Map.mapaAtual, assets, player, (1,-1), ((13, -11), coinSeed), 0) :: Game
+    let game = Startup.loadGame assets MENU SOLO DFS
+    -- let game = (cellSize, width, height, Map.mapaAtual, assets, player, (1,-1), ((13, -11), coinSeed), 0) :: Game
 
     play
         window
-        background
-        fps
+        Startup.background
+        Startup.fps
         game
         drawingFunc
-        Game.inputHandler
-        Game.updateGame
+        inputHandler
+        updateFunc
 
 
 drawingFunc :: Game -> Picture
-drawingFunc game = translate startX startY (Game.drawGame game)
+drawingFunc (cellSize, width, mapa, assets, player, ghosts, GAME)  = translate Startup.startX Startup.startY (drawGame (cellSize, width, mapa, assets, player, ghosts, GAME))
+drawingFunc (cellSize, width, mapa, assets, player, ghosts, state) = drawMenu width title state
 
-loadAssets :: IO [Picture]
-loadAssets = mapM load assetsName
-    where
-        load image = loadBMP ("assets/" ++ image ++ ".bmp")
+updateFunc :: Float -> Game -> Game
+updateFunc dt (cellSize, width, mapa, assets, player, ghosts, GAME) = Game.updateGame dt (cellSize, width, mapa, assets, player, ghosts, GAME) 
+updateFunc dt game = game
+
+inputHandler :: Event -> Game -> Game
+inputHandler event (cellSize, width, mapa, assets, player, ghosts, GAME) = gameInputHandler event (cellSize, width, mapa, assets, player, ghosts, GAME)
+inputHandler event (cellSize, width, mapa, assets, player, ghosts, state) = menuInputHandler event (cellSize, width, mapa, assets, player, ghosts, state)
+

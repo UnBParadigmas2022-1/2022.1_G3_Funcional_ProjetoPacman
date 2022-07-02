@@ -30,7 +30,7 @@ executable x20221-G3-Funcional-ProjetoPacman
     other-modules:
         AEstrela, Game, Map,
         Types, Player, Coin, Ghost, 
-        Scoreboard
+        Scoreboard, Menu, Bfs, Startup
 
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:

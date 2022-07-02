@@ -13,22 +13,22 @@ import Coin
 
 
 drawGame :: Game -> Picture
-drawGame (cellSize, width, height, mapa, assets, player, ghost, coin, score) = 
+drawGame (cellSize, width, height, mapa, assets, player, ghosts, coin, score, state) = 
     pictures $ dMap ++ [dPlayer] ++ [dGhost] ++ [dCoin] ++ [dScoreboard]
     where
         dMap = Map.drawMapa assets cellSize width mapa (0, 0)
         dPlayer = Player.drawPlayer assets cellSize player
         dCoin = Coin.drawCoin cellSize assets coin
         dScoreboard = Scoreboard.drawScoreboard height score
-        dGhost = Ghost.drawGhost assets cellSize ghost
+        dGhost = Ghost.drawGhosts ghosts assets cellSize
 
 
 updateGame :: Float -> Game -> Game
-updateGame dt (cellSize, width, height, mapa, assets, player, ghost, coin, score) = 
-    (cellSize, width, height, mapa, assets, uPlayer, uGhost, uCoin, uScore)
+updateGame dt (cellSize, width, height, mapa, assets, player, ghosts, coin, score, state) = 
+    (cellSize, width, height, mapa, assets, uPlayer, uGhost, uCoin, uScore, state)
     where
         uPlayer = Player.updatePlayer player
-        uGhost = Ghost.updateGhost ghost player
+        uGhost = Ghost.updateGhosts ghosts player
         uScore = (score+1) `mod` 10
         uCoin
             | uScore == 0 = Coin.updateCoin coin
@@ -36,7 +36,7 @@ updateGame dt (cellSize, width, height, mapa, assets, player, ghost, coin, score
 
 
 inputHandler :: Event -> Game -> Game
-inputHandler event (cellSize, width, height, mapa, assets, player, ghost, coin, score) = 
+inputHandler event (cellSize, width, height, mapa, assets, player, ghost, coin, score, state) = 
     (
         cellSize, 
         width, 
@@ -46,7 +46,8 @@ inputHandler event (cellSize, width, height, mapa, assets, player, ghost, coin, 
         iPlayer, 
         ghost, 
         coin, 
-        score
+        score,
+        state
     )
     where
         iPlayer = Player.inputPlayer event player
