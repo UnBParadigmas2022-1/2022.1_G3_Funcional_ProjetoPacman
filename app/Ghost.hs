@@ -2,7 +2,7 @@ module Ghost where
 
 import Graphics.Gloss
 import Types
-import AEstrela
+import Bfs
 
 drawGhost :: Assets -> Float -> Ghost -> Picture
 drawGhost [_, _, _, _, orangeGhost] cellSize (x,y) = color yellow $ translate (cellSize*x) (cellSize*(y)) $ orangeGhost
@@ -10,4 +10,4 @@ drawGhost [_, _, _, _, orangeGhost] cellSize (x,y) = color yellow $ translate (c
 updateGhost :: Ghost -> Ghost
 updateGhost (x,y) = (newX,-newY)
     where
-        (newX, newY) = AEstrela.aStar (x,abs(y)) (26,29)
+        (newX, newY) = Bfs.bShortestPath (x,abs(y)) (26,29)
