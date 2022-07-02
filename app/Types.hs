@@ -17,6 +17,7 @@ type Assets = [Picture]
 
 data State =
       MENU
+    | MENU_SOLO
     | GAME
     | END
     deriving(Enum, Ord, Eq)

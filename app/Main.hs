@@ -46,16 +46,16 @@ main = do
 
 
 drawingFunc :: Game -> Picture
-drawingFunc (cellSize, width, mapa, assets, player, ghost, MENU, algo) = drawMenu width title
 drawingFunc (cellSize, width, mapa, assets, player, ghost, GAME, algo)  = translate startX startY (drawGame (cellSize, width, mapa, assets, player, ghost, GAME, algo))
+drawingFunc (cellSize, width, mapa, assets, player, ghost, state, algo) = drawMenu width title state
 
 updateFunc :: Float -> Game -> Game
 updateFunc dt (cellSize, width, mapa, assets, player, ghost, GAME, algo) = Game.updateGame dt (cellSize, width, mapa, assets, player, ghost, GAME, algo) 
 updateFunc dt game = game
 
 inputHandler :: Event -> Game -> Game
-inputHandler event (cellSize, width, mapa, assets, player, ghost, MENU, algo) = menuInputHandler event (cellSize, width, mapa, assets, player, ghost, MENU, algo)
 inputHandler event (cellSize, width, mapa, assets, player, ghost, GAME, algo) = gameInputHandler event (cellSize, width, mapa, assets, player, ghost, GAME, algo)
+inputHandler event (cellSize, width, mapa, assets, player, ghost, state, algo) = menuInputHandler event (cellSize, width, mapa, assets, player, ghost, state, algo)
 
 
 loadAssets :: IO [Picture]

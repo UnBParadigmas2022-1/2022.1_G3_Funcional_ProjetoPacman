@@ -7,28 +7,42 @@ import Types
 
 
 -- Draw
-drawMenu :: Width -> String -> Picture
-drawMenu width title = translate (-width/2 + 50) 100 $ pictures [dTitle, drawSubTitle width]
+drawMenu :: Width -> String -> State -> Picture
+drawMenu width title state =
+    translate (-width/2 + 50) 100 
+    $ pictures [dTitle, drawSubTitle width state]
     where
         dTitle = color red $ text title
 
-drawSubTitle :: Width -> Picture
-drawSubTitle width = dScale $ dTranslate $ color white $ pictures $ dText : drawAlgorithms (-200) algos
+drawSubTitle :: Width -> State -> Picture
+drawSubTitle width state = 
+    scale 0.2 0.2
+    $ translate 50 (-200)
+    $ color white 
+    $ pictures $ dText : drawOptions (-200) options
     where
-        algos = ["A - A* Search", "B - Breadth First Search", "D - Depth-first search", "K - Dijkstra"]
-        dText = text "Escolha um dos algoritmos para comecar:"
-        dScale = scale 0.2 0.2
-        dTranslate = translate 50 (-200)
+        options
+            | state == MENU = ["1 - Modo Solo", "2 - Modo Dificil"]
+            | state == MENU_SOLO = ["A - A* Search", "B - Breadth First Search", "D - Depth-first search", "K - Dijkstra"]
+        dText = text "Escolha uma das opcoes abaixo:"
 
-drawAlgorithms :: Float -> [String] -> [Picture]
-drawAlgorithms _ [] = []
-drawAlgorithms height (h:t) = translate 100 height (text h) : drawAlgorithms (height-150) t
+drawOptions :: Float -> [String] -> [Picture]
+drawOptions _ [] = []
+drawOptions height (h:t) = translate 100 height (text h) : drawOptions (height-150) t
 
 
 -- Input
 menuInputHandler :: Event -> Game -> Game
-menuInputHandler (EventKey (Char 'a') Down _ _) (cellSize, width, mapa, assets, player, ghost, state, algo) = (cellSize, width, mapa, assets, player, ghost, GAME, ASTAR)
-menuInputHandler (EventKey (Char 'b') Down _ _) (cellSize, width, mapa, assets, player, ghost, state, algo) = (cellSize, width, mapa, assets, player, ghost, GAME, BFS)
-menuInputHandler (EventKey (Char 'd') Down _ _) (cellSize, width, mapa, assets, player, ghost, state, algo) = (cellSize, width, mapa, assets, player, ghost, GAME, DFS)
-menuInputHandler (EventKey (Char 'k') Down _ _) (cellSize, width, mapa, assets, player, ghost, state, algo) = (cellSize, width, mapa, assets, player, ghost, GAME, DJK)
-menuInputHandler _ g = g
+menuInputHandler event (cellSize, width, mapa, assets, player, ghost, state, algo) =
+    (cellSize, width, mapa, assets, player, ghost, iState, iAlgo)
+    where
+        (iState, iAlgo) = menuEventHandler event state algo
+
+menuEventHandler :: Event -> State -> Algorithm -> (State, Algorithm)
+menuEventHandler (EventKey (Char '1') Down _ _) MENU algo = (MENU_SOLO, algo)
+menuEventHandler (EventKey (Char '2') Down _ _) MENU algo = (GAME, algo)
+menuEventHandler (EventKey (Char 'a') Down _ _) MENU_SOLO _ = (GAME, ASTAR)
+menuEventHandler (EventKey (Char 'b') Down _ _) MENU_SOLO _ = (GAME, BFS)
+menuEventHandler (EventKey (Char 'd') Down _ _) MENU_SOLO _ = (GAME, DFS)
+menuEventHandler (EventKey (Char 'k') Down _ _) MENU_SOLO _ = (GAME, DJK)
+menuEventHandler _ s a = (s, a)
