@@ -4,17 +4,23 @@ import Graphics.Gloss
 
 import Types
 import AEstrela
+import Bfs
 import Map
 
+
 drawGhost :: Assets -> Float -> Ghost -> Picture
-drawGhost [_, _, _, _, _, orangeGhost] cellSize (x,y, _) =
+drawGhost [_, _, _, _, _, orangeGhost] cellSize (x,y, _, _) =
     translate (cellSize*x) (cellSize*y) orangeGhost
 
 
 updateGhost :: Player -> Ghost -> Ghost
-updateGhost ((px, py), (_, _)) (x, y, slow) = (newX, -newY, slow)
+updateGhost ((px, py), (_, _)) (x,y, slow, algo) = (newX, -newY, slow, algo)
     where
-        (newX, newY) = AEstrela.aStar (x,abs y) (px, abs py)
+        point = (x,abs(y))
+        (newX, newY)
+            | algo == ASTAR = AEstrela.aStar point (px, py)
+            | algo == BFS = Bfs.bShortestPath point (px, py)
+            | otherwise = AEstrela.aStar point (px, py)
 
 
 drawGhosts :: Ghosts -> Assets -> CellSize -> Picture 
@@ -26,10 +32,10 @@ updateGhosts ghosts player = map (updateGhostSlow player) ghosts
 
 
 updateGhostSlow :: Player -> Ghost -> Ghost
-updateGhostSlow player (x, y, slow)
-    | actualValue == 1, slow == 0  = Ghost.updateGhost player (x, y, -1)
-    | actualValue > 1, slow < 0 = (x, y, actualValue)
-    | slow > 0 = (x, y, slow - 1)
-    | otherwise = Ghost.updateGhost player (x, y, slow)
+updateGhostSlow player (x, y, slow, algo)
+    | actualValue == 1, slow == 0  = Ghost.updateGhost player (x, y, -1, algo)
+    | actualValue > 1, slow < 0 = (x, y, actualValue, algo)
+    | slow > 0 = (x, y, slow - 1, algo)
+    | otherwise = Ghost.updateGhost player (x, y, slow, algo)
     where   
         actualValue = getCellValue(x,y)

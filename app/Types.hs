@@ -4,6 +4,26 @@ import Graphics.Gloss
 import Data.List
 
 
+data State =
+      MENU
+    | MENU_SOLO
+    | GAME
+    | END
+    deriving(Enum, Ord, Eq)
+
+data Algorithm =
+      BFS
+    | DFS
+    | DJK
+    | ASTAR
+    deriving(Enum, Ord, Eq)
+
+data GameMode =
+     SOLO
+    | HARD
+    deriving(Enum, Ord, Eq)
+
+  
 type CellSize = Float
 type Width    = Float
 type MultValor = (Point, Point)
@@ -13,10 +33,11 @@ type Mapa = [Cell]
 
 type Player = (Point, Point)
 
+
 type Slow = Float
-type Ghost = (Float, Float, Float)
+type Ghost = (Float, Float, Float, Algorithm)
 type Ghosts = [Ghost]
 
 type Assets = [Picture]
 
-type Game = (CellSize, Width, Mapa, Assets, Player, Ghosts)
+type Game = (CellSize, Width, Mapa, Assets, Player, Ghosts, State)
