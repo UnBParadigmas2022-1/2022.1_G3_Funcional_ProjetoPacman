@@ -43,6 +43,8 @@
 --     let novaHeap = foldl (\heap adj -> insereHeap adj ((mapa !! point2Index adj) + pesoSelecionado) heap) heapPop adjsLivres
 --     (selecionado, novaHeap)
 
+module Djikstra (djikstraPath) where
+
 import Data.Heap
 import Data.List
 import Graphics.Gloss
@@ -51,6 +53,23 @@ import Map
 import Types
 
 type Valor = (Point, Point)
+
+djikstraPath :: Point -> Point -> Point
+djikstraPath posInicial posFinal = geraProximo (reverse caminho) posInicial
+    where
+        caminho = menorCaminho posInicial posFinal
+
+geraProximo :: [Valor] -> Point -> Point
+geraProximo [] inicial = inicial
+geraProximo [(f,p)] _ = f
+geraProximo [(f,p), _] _ = f
+geraProximo ((f,p):t) inicial = proximo t inicial p
+
+proximo :: [Valor] -> Point -> Point -> Point
+proximo ((f,p):t) inicial anterior
+    | p == inicial && f == anterior = f
+    | f == anterior = proximo t inicial p
+    | otherwise = proximo t inicial anterior
 
 -- Insere nó e distância na Heap
 insereHeap :: Valor -> Float -> MinPrioHeap Float Valor -> MinPrioHeap Float Valor
