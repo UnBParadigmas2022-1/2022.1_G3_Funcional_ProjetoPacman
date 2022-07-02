@@ -52,9 +52,9 @@ mapaAtual = [
 imageCell :: Cell -> Assets -> CellSize -> Picture
 imageCell 0 (wall:_) _ = wall
 imageCell 1 _ cellSize = color black $ rectangleSolid cellSize cellSize
-imageCell 3 [_, gold, _, _, _, _] _    = gold
-imageCell 7 [_, _, diamond, _, _, _] _ = diamond
-imageCell 10 [_, _, _, nether, _, _] _  = nether
+imageCell 3 [_, gold, _, _, _, _, _] _    = gold
+imageCell 7 [_, _, diamond, _, _, _, _] _ = diamond
+imageCell 10 [_, _, _, nether, _, _, _] _  = nether
 
 drawMapaCell :: Assets -> CellSize -> Float -> Float -> Cell -> Picture
 drawMapaCell assets cellSize x y cell = translate x y $ imageCell cell assets cellSize
