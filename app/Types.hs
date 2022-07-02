@@ -10,9 +10,13 @@ type MultValor = (Point, Point)
 
 type Cell = Float
 type Mapa = [Cell]
+
 type Player = (Point, Point)
-type Ghost = (Float, Float)
+
+type Slow = Float
+type Ghost = (Float, Float, Float)
+type Ghosts = [Ghost]
 
 type Assets = [Picture]
 
-type Game = (CellSize, Width, Mapa, Assets, Player, Ghost)
+type Game = (CellSize, Width, Mapa, Assets, Player, Ghosts)

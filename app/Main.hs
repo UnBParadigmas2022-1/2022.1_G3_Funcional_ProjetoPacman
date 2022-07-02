@@ -15,6 +15,8 @@ cellSize    = 25                     :: CellSize
 width       = mapaWidth*cellSize     :: Width
 height      = mapaHeight*cellSize    :: Float
 player      = ((13, 17), (1, 0))     :: Player
+ghost       = (1, -1, -1)            :: Ghost
+ghosts      = [(1, -1, -1), (26, -1, -1)] :: Ghosts
 
 startX = (cellSize - width)  / 2.0
 startY = (height - cellSize) / 2.0
@@ -32,7 +34,7 @@ window = (InWindow title (iwidth, iheight) (0, 0))
 main :: IO ()
 main = do
     assets <- loadAssets
-    let game = (cellSize, width, Map.mapaAtual, assets, player, (1,-1)) :: Game
+    let game = (cellSize, width, Map.mapaAtual, assets, player, ghosts) :: Game
 
     play
         window
