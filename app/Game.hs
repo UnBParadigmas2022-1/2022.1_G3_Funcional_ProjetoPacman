@@ -6,17 +6,22 @@ import Graphics.Gloss.Interface.Pure.Game
 import Types
 import Map
 import Player
+import Ghost
 
 
 drawGame :: Game -> Picture
-drawGame (cellSize, width, mapa, assets, player) =
-    pictures (
-        Map.drawMapa assets cellSize width mapa (0, 0)
-        ++ Player.drawPlayer cellSize player
-    )
+drawGame (cellSize, width, mapa, assets, player, ghost) = pictures $ (Map.drawMapa assets cellSize width mapa (0, 0)) ++ [dPlayer] ++ [dGhost]
+    where
+        dPlayer = Player.drawPlayer cellSize player
+        dGhost = Ghost.drawGhost assets cellSize ghost
 
 updateGame :: Float -> Game -> Game
-updateGame dt game = Player.updatePlayer game
+updateGame dt (cellSize, width, mapa, assets, player, ghost) = (cellSize, width, mapa, assets, uPlayer, uGhost)
+    where
+        uPlayer = Player.updatePlayer player
+        uGhost = Ghost.updateGhost ghost
 
 inputHandler :: Event -> Game -> Game
-inputHandler event game = Player.inputPlayer event game
+inputHandler event (cellSize, width, mapa, assets, player, ghost) = (cellSize, width, mapa, assets, iPlayer, ghost)
+    where
+        iPlayer = Player.inputPlayer event player

@@ -19,7 +19,7 @@ player      = ((13, 17), (1, 0))     :: Player
 startX = (cellSize - width)  / 2.0
 startY = (height - cellSize) / 2.0
 
-assetsName = ["wall", "gold", "diamond", "nether"]
+assetsName = ["wall", "gold", "diamond", "nether", "orange-ghost"]
 
 
 window :: Display
@@ -32,7 +32,7 @@ window = (InWindow title (iwidth, iheight) (0, 0))
 main :: IO ()
 main = do
     assets <- loadAssets
-    let game = (cellSize, width, Map.mapaAtual, assets, player) :: Game
+    let game = (cellSize, width, Map.mapaAtual, assets, player, (1,-1)) :: Game
 
     play
         window
@@ -46,7 +46,6 @@ main = do
 
 drawingFunc :: Game -> Picture
 drawingFunc game = translate startX startY (Game.drawGame game)
-
 
 loadAssets :: IO [Picture]
 loadAssets = mapM load assetsName

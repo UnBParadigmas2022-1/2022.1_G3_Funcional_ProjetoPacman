@@ -7,15 +7,15 @@ import Map
 import Types (CellSize, Player, Game)
 
 
-drawPlayer :: CellSize -> Player -> [Picture]
+drawPlayer :: CellSize -> Player -> Picture
 drawPlayer cellSize ((x, y), (_, _)) =
-    (translate (cellSize*x) (-cellSize*y) $ color white $ rectangleSolid cellSize cellSize) : []
+    (translate (cellSize*x) (-cellSize*y) $ color white $ rectangleSolid cellSize cellSize)
 
-updatePlayer :: Game -> Game
-updatePlayer (cellSize, width, mapa, assets, ((x, y), (sx, sy)))
-    | Map.isTunnel (x+sx, y+sy)     = (cellSize, width, mapa, assets, (jumpPlayer ((x, y), (sx, sy))))
-    | Map.isWallCell (x+sx, y+sy)   = (cellSize, width, mapa, assets, ((x, y), (0, 0)))
-    | otherwise                     = (cellSize, width, mapa, assets, ((x+sx, y+sy), (sx, sy)))
+updatePlayer :: Player -> Player
+updatePlayer ((x, y), (sx, sy))
+    | Map.isTunnel (x+sx, y+sy)     = ((jumpPlayer ((x, y), (sx, sy))))
+    | Map.isWallCell (x+sx, y+sy)   = (((x, y), (0, 0)))
+    | otherwise                     = (((x+sx, y+sy), (sx, sy)))
 
 jumpPlayer :: Player -> Player
 jumpPlayer ((x, y), (sx, sy))
@@ -23,14 +23,14 @@ jumpPlayer ((x, y), (sx, sy))
     | sx < 0    = ((Map.mapaWidth-1, y), (sx, sy))
     | otherwise = ((x, y), (sx, sy))
 
-inputPlayer :: Event -> Game -> Game
-inputPlayer (EventKey (SpecialKey KeyUp) Down _ _) game = movePlayer (0, -1) game
-inputPlayer (EventKey (SpecialKey KeyDown) Down _ _) game = movePlayer (0, 1) game
-inputPlayer (EventKey (SpecialKey KeyLeft) Down _ _) game = movePlayer (-1, 0) game
-inputPlayer (EventKey (SpecialKey KeyRight) Down _ _) game = movePlayer (1, 0) game
-inputPlayer _ game = game
+inputPlayer :: Event -> Player -> Player
+inputPlayer (EventKey (SpecialKey KeyUp) Down _ _) player = movePlayer (0, -1) player
+inputPlayer (EventKey (SpecialKey KeyDown) Down _ _) player = movePlayer (0, 1) player
+inputPlayer (EventKey (SpecialKey KeyLeft) Down _ _) player = movePlayer (-1, 0) player
+inputPlayer (EventKey (SpecialKey KeyRight) Down _ _) player = movePlayer (1, 0) player
+inputPlayer _ player = player
 
-movePlayer :: Point -> Game -> Game
-movePlayer (nsx, nsy) (cellSize, width, mapa, assets, ((x, y), (sx, sy)))
-    | Map.isWallCell (x+nsx, y+nsy) = (cellSize, width, mapa, assets, ((x, y), (sx, sy)))
-    | otherwise = (cellSize, width, mapa, assets, ((x, y), (nsx, nsy)))
+movePlayer :: Point -> Player -> Player
+movePlayer (nsx, nsy) ((x, y), (sx, sy))
+    | Map.isWallCell (x+nsx, y+nsy) = ((x, y), (sx, sy))
+    | otherwise = ((x, y), (nsx, nsy))
