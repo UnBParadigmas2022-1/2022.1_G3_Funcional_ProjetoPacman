@@ -2,6 +2,7 @@ module Main where
 
 import Graphics.Gloss
 import Graphics.Gloss.Interface.Pure.Game
+import System.Random
 
 import Startup
 import Game
@@ -10,7 +11,7 @@ import Menu
 import End
 
 window :: Display
-window = (InWindow title (iwidth, iheight) (0, 0))
+window = InWindow title (iwidth, iheight) (0, 0)
     where
         iwidth  = round Startup.width
         iheight = round Startup.height
@@ -19,7 +20,8 @@ window = (InWindow title (iwidth, iheight) (0, 0))
 main :: IO ()
 main = do
     assets <- Startup.loadAssets
-    let game = Startup.loadGame assets MENU SOLO DFS
+    let coinSeed = mkStdGen 777
+    let game = Startup.loadGame assets MENU SOLO DFS coinSeed
 
     play
         window
@@ -32,17 +34,19 @@ main = do
 
 
 drawingFunc :: Game -> Picture
-drawingFunc (cellSize, width, mapa, assets, player, ghosts, GAME)  = translate Startup.startX Startup.startY (drawGame (cellSize, width, mapa, assets, player, ghosts, GAME))
-drawingFunc (cellSize, width, mapa, assets, player, ghosts, END) = drawEnd width
-drawingFunc (cellSize, width, mapa, assets, player, ghosts, state) = drawMenu width title state
+drawingFunc (cellSize, width, height, mapa, assets, player, ghosts, coin, score, GAME) =
+    translate Startup.startX Startup.startY (drawGame (cellSize, width, height, mapa, assets, player, ghosts, coin, score, GAME))
+drawingFunc (cellSize, width, height, mapa, assets, player, ghosts, coin, score, state) = drawMenu width title state
 
 
 updateFunc :: Float -> Game -> Game
-updateFunc dt (cellSize, width, mapa, assets, player, ghosts, GAME) = Game.updateGame dt (cellSize, width, mapa, assets, player, ghosts, GAME) 
+updateFunc dt (cellSize, width, height, mapa, assets, player, ghosts, coin, score, GAME) =
+    Game.updateGame dt (cellSize, width, height, mapa, assets, player, ghosts, coin, score, GAME) 
 updateFunc dt game = game
 
 
 inputHandler :: Event -> Game -> Game
-inputHandler event (cellSize, width, mapa, assets, player, ghosts, GAME) = gameInputHandler event (cellSize, width, mapa, assets, player, ghosts, GAME)
-inputHandler event (cellSize, width, mapa, assets, player, ghosts, END)  = endInputHandler event (cellSize, width, mapa, assets, player, ghosts, END) 
-inputHandler event (cellSize, width, mapa, assets, player, ghosts, state) = menuInputHandler event (cellSize, width, mapa, assets, player, ghosts, state)
+inputHandler event (cellSize, width, height, mapa, assets, player, ghosts, coin, score, GAME) =
+    gameInputHandler event (cellSize, width, height, mapa, assets, player, ghosts, coin, score, GAME)
+inputHandler event (cellSize, width, height, mapa, assets, player, ghosts, coin, score, state) =
+    menuInputHandler event (cellSize, width, height, mapa, assets, player, ghosts, coin, score, state)

@@ -30,6 +30,7 @@ executable x20221-G3-Funcional-ProjetoPacman
     other-modules:
         AEstrela, Game, Map,
         Types, Player, Coin, Ghost,
+        Scoreboard, Menu, Bfs, Startup,
         Menu, Bfs, Startup, End
 
     -- LANGUAGE extensions used by modules in this package.
@@ -37,6 +38,7 @@ executable x20221-G3-Funcional-ProjetoPacman
     build-depends:
         base ==4.*,
         heap ==1.*,
-        gloss ==1.*
+        gloss ==1.*,
+        random ==1.*,
     hs-source-dirs:   app
     default-language: Haskell2010

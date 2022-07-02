@@ -9,7 +9,7 @@ import Map
 
 
 drawGhost :: Assets -> Float -> Ghost -> Picture
-drawGhost [_, _, _, _, _, orangeGhost] cellSize (x,y, _, _) =
+drawGhost [_, _, _, _, _, orangeGhost, _] cellSize (x,y, _, _) =
     translate (cellSize*x) (cellSize*y) orangeGhost
 
 

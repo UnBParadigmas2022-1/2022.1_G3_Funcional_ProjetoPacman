@@ -8,7 +8,7 @@ import Types (Assets, CellSize, Player, Game)
 
 
 drawPlayer :: Assets -> CellSize -> Player -> Picture
-drawPlayer [_, _, _, _, player, _] cellSize ((x, y), (_, _)) =
+drawPlayer [_, _, _, _, player, _, _] cellSize ((x, y), (_, _)) =
     translate (cellSize*x) (-cellSize*y) $ player
 
 updatePlayer :: Player -> Player

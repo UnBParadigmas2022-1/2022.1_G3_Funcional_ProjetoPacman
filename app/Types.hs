@@ -2,6 +2,7 @@ module Types where
 
 import Graphics.Gloss
 import Data.List
+import System.Random
 
 
 data State =
@@ -26,6 +27,7 @@ data GameMode =
   
 type CellSize = Float
 type Width    = Float
+type Height   = Float
 type MultValor = (Point, Point)
 
 type Cell = Float
@@ -33,11 +35,11 @@ type Mapa = [Cell]
 
 type Player = (Point, Point)
 
-
-type Slow = Float
-type Ghost = (Float, Float, Float, Algorithm)
-type Ghosts = [Ghost]
-
 type Assets = [Picture]
 
-type Game = (CellSize, Width, Mapa, Assets, Player, Ghosts, State)
+type Ghost = (Float, Float, Float, Algorithm)
+type Ghosts = [Ghost]
+type Coin = (Point, StdGen)
+type Score = Int
+
+type Game = (CellSize, Width, Height, Mapa, Assets, Player, Ghosts, Coin, Score, State)

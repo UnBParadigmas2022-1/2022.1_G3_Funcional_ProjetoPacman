@@ -8,30 +8,39 @@ import Map
 import Player
 import Ghost
 
+import Scoreboard
+import Coin
+
 
 drawGame :: Game -> Picture
-drawGame (cellSize, width, mapa, assets, player, ghosts, state) =
-    pictures [dMap, dPlayer, dGhost]
+drawGame (cellSize, width, height, mapa, assets, player, ghosts, coin, score, state) = 
+    pictures $ dMap ++ [dPlayer] ++ [dGhost] ++ [dCoin] ++ [dScoreboard]
     where
-        dMap = pictures $ Map.drawMapa assets cellSize width mapa (0, 0)
+        dMap = Map.drawMapa assets cellSize width mapa (0, 0)
         dPlayer = Player.drawPlayer assets cellSize player
+        dCoin = Coin.drawCoin cellSize assets coin
+        dScoreboard = Scoreboard.drawScoreboard height score
         dGhost = Ghost.drawGhosts ghosts assets cellSize
 
 
 updateGame :: Float -> Game -> Game
-updateGame dt (cellSize, width, mapa, assets, player, ghosts, state) =
-    (cellSize, width, mapa, assets, uPlayer, uGhosts, uState)
+updateGame dt (cellSize, width, height, mapa, assets, player, ghosts, coin, score, state) = 
+    (cellSize, width, height, mapa, assets, uPlayer, uGhost, uCoin, uScore, state)
     where
         uPlayer = Player.updatePlayer player
-        uGhosts = Ghost.updateGhosts ghosts player
+        uGhost = Ghost.updateGhosts ghosts player
+        uScore = (score+1) `mod` 10
         uGhostsPositions = map (\(x, y, _, _) -> (x, y)) uGhosts
         uState
             | hasCollision player uGhostsPositions = END
             | otherwise = GAME
+        uCoin
+            | uScore == 0 = Coin.updateCoin coin
+            | otherwise = coin
 
 
 gameInputHandler :: Event -> Game -> Game
-gameInputHandler event (cellSize, width, mapa, assets, player, ghosts, state) = 
-    (cellSize, width, mapa, assets, iPlayer, ghosts, state)
+gameInputHandler event (cellSize, width, height, mapa, assets, player, ghosts, coin, score, state) = 
+    (cellSize, width, height, mapa, assets, iPlayer, ghosts, coin, score, state)
     where
         iPlayer = Player.inputPlayer event player
