@@ -20,7 +20,7 @@ coinPrice True = 10
 coinPrice False = 0
 
 generateRandom :: StdGen -> (Int, Int) -> (Int, StdGen)
-generateRandom seed range = randomR range seed
+generateRandom seed range = uniformR range seed
 
 updateCoin :: Coin -> Coin
 updateCoin (pos, seed)
