@@ -8,11 +8,14 @@ import Bfs
 import Djikstra
 import Map
 
+ghostImage :: Assets -> Algorithm -> Picture
+ghostImage [_, _, _, _, _, orangeGhost, _, _, _, _] BFS = orangeGhost
+ghostImage [_, _, _, _, _, _, _, pinkGhost, _, _] ASTAR =  pinkGhost
+ghostImage [_, _, _, _, _, _, _, _, blueGhost, _] DJK = blueGhost
+ghostImage [_, _, _, _, _, _, _, _, _, orangeGhost] DFS = orangeGhost
 
 drawGhost :: Assets -> Float -> Ghost -> Picture
-drawGhost [_, _, _, _, _, orangeGhost, _] cellSize (x,y, _, _) =
-    translate (cellSize*x) (cellSize*y) orangeGhost
-
+drawGhost assets cellSize (x,y, _, algo) = translate (cellSize*x) (cellSize*y) (ghostImage assets algo)
 
 updateGhost :: Player -> Ghost -> Ghost
 updateGhost ((px, py), (_, _), _) (x,y, slow, algo) = (newX, -newY, slow, algo)
