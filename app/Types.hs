@@ -32,8 +32,7 @@ type MultValor = (Point, Point)
 
 type Cell = Float
 type Mapa = [Cell]
-
-type Player = (Point, Point)
+type Player = (Point, Point, Float)
 
 type Assets = [Picture]
 

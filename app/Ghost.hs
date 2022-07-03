@@ -15,7 +15,7 @@ drawGhost [_, _, _, _, _, orangeGhost, _] cellSize (x,y, _, _) =
 
 
 updateGhost :: Player -> Ghost -> Ghost
-updateGhost ((px, py), (_, _)) (x,y, slow, algo) = (newX, -newY, slow, algo)
+updateGhost ((px, py), (_, _), _) (x,y, slow, algo) = (newX, -newY, slow, algo)
     where
         point = (x,abs(y))
         (newX, newY)
