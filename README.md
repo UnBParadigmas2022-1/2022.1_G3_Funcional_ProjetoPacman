@@ -101,7 +101,10 @@ Haskell é estaticamente tipado. Quando compila o programa, o compilador saberá
 
 O projeto apresentada uma fragilidade no algoritmo Dfs (Depth-first search), pois ele não está implementado corretamente. Ele não consegue retornam o caminho completo que o fantasma deve realizar, ao contrátrio dos outros algoritmos.
 A fragilidade é quando o fantasma chega em um ponto que tem a possibilidade de mais de um caminho ele sempre escolhe o primeiro, sendo assim criando um loop como pode ser visto abaixo:
+
+<p>
 <img src="bugDsf.gif" width="400" height="400" />
+</p>
 
 ###  Melhorias Futuras do Trabalho
 Diversas alterações e melhorias ainda podem ser feitas, e a equipe separou algumas interessantes:
