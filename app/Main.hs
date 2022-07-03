@@ -2,52 +2,54 @@ module Main where
 
 import Graphics.Gloss
 import Graphics.Gloss.Interface.Pure.Game
+import System.Random
 
+import Startup
 import Game
 import Types
-import Map
-
-title  = "Pacman"
-
-fps = 5
-
-cellSize    = 25                     :: CellSize
-width       = mapaWidth*cellSize     :: Width
-height      = mapaHeight*cellSize    :: Float
-player      = ((13, 17), (1, 0), 0)     :: Player
-
-startX = (cellSize - width)  / 2.0
-startY = (height - cellSize) / 2.0
-
-assetsName = ["wall", "gold", "diamond", "nether", "player", "orange-ghost"]
-
+import Menu
+import End
 
 window :: Display
-window = (InWindow title (iwidth, iheight) (0, 0))
+window = InWindow title (iwidth, iheight) (0, 0)
     where
-        iwidth  = round width
-        iheight = round height
+        iwidth  = round Startup.width
+        iheight = round Startup.height
 
 
 main :: IO ()
 main = do
-    assets <- loadAssets
-    let game = (cellSize, width, Map.mapaAtual, assets, player, (1,-1)) :: Game
+    assets <- Startup.loadAssets
+    let coinSeed = mkStdGen 777
+    let game = Startup.loadGame assets MENU SOLO DFS coinSeed
 
     play
         window
-        white
-        fps
+        Startup.background
+        Startup.fps
         game
         drawingFunc
-        Game.inputHandler
-        Game.updateGame
+        inputHandler
+        updateFunc
 
 
 drawingFunc :: Game -> Picture
-drawingFunc game = translate startX startY (Game.drawGame game)
+drawingFunc (cellSize, width, height, mapa, assets, player, ghosts, coin, score, GAME) =
+    translate Startup.startX Startup.startY (drawGame (cellSize, width, height, mapa, assets, player, ghosts, coin, score, GAME))
+drawingFunc (cellSize, width, height, mapa, assets, player, ghosts, coin, score, END) = drawEnd width score
+drawingFunc (cellSize, width, height, mapa, assets, player, ghosts, coin, score, state) = drawMenu width title state
 
-loadAssets :: IO [Picture]
-loadAssets = mapM load assetsName
-    where
-        load image = loadBMP ("assets/" ++ image ++ ".bmp")
+
+updateFunc :: Float -> Game -> Game
+updateFunc dt (cellSize, width, height, mapa, assets, player, ghosts, coin, score, GAME) =
+    Game.updateGame dt (cellSize, width, height, mapa, assets, player, ghosts, coin, score, GAME) 
+updateFunc dt game = game
+
+
+inputHandler :: Event -> Game -> Game
+inputHandler event (cellSize, width, height, mapa, assets, player, ghosts, coin, score, GAME) =
+    gameInputHandler event (cellSize, width, height, mapa, assets, player, ghosts, coin, score, GAME)
+inputHandler event (cellSize, width, height, mapa, assets, player, ghosts, coin, score, END) =
+    endInputHandler event (cellSize, width, height, mapa, assets, player, ghosts, coin, score, END)
+inputHandler event (cellSize, width, height, mapa, assets, player, ghosts, coin, score, state) =
+    menuInputHandler event (cellSize, width, height, mapa, assets, player, ghosts, coin, score, state)

@@ -8,7 +8,7 @@ import Types (Assets, CellSize, Player, Game)
 
 
 drawPlayer :: Assets -> CellSize -> Player -> Picture
-drawPlayer [_, _, _, _, player, _] cellSize ((x, y), (sx, sy), angle) =
+drawPlayer [_, _, _, _, player, _, _] cellSize ((x, y), (sx, sy), angle) =
     translate (cellSize*x) (-cellSize*y) $ scale 1 (mirror) $ rotate angle player
     where
         mirror = fromInteger $ ceiling $ (sin angle) + (cos angle)
@@ -44,3 +44,6 @@ movePlayer :: Point -> Player -> Player
 movePlayer (nsx, nsy) ((x, y), (sx, sy), angle)
     | Map.isWallCell (x+nsx, y+nsy) = ((x, y), (sx, sy), angle)
     | otherwise = ((x, y), (nsx, nsy), angle)
+
+hasCollision :: Player -> [Point] -> Bool
+hasCollision (posPlayer, _, _) points = any (\(x, y) -> posPlayer == (x, abs y)) points

@@ -4,6 +4,7 @@ import Data.Heap
 import Data.List
 import Graphics.Gloss
 
+import Types
 import Map
 import Types
 
