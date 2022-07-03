@@ -28,16 +28,18 @@ A ideia do projeto é baseada do projeto final de um dos integrantes do grupo: [
     <img src="https://user-images.githubusercontent.com/46077033/177053644-6aec9b82-0a68-4a68-af31-a0cf170290e9.png" width="400" height="400" />
 </p>
 
-## Instalação 
-**Linguagens**: haskell<br>
-**Tecnologias**: GHCI, cabal e haskell<br>
+## Instalação
+
+**Linguagens**: haskell <br>
+**Tecnologias**: GHCI, cabal e haskell <br>
 
 ## Pré-requisitos
 ### Haskell, GHCI e cabal
-O haskell pode ser baixado em conjunto com o ghci (e o cabal) através dos links dispostos, ou através dos pacotes oficiais de cada distro, na página oficial do haskell:<br>
-https://www.haskell.org/downloads/
 
-## Uso 
+O haskell pode ser baixado em conjunto com o ghci (e o cabal) através dos links dispostos, ou através dos pacotes oficiais de cada distro, na página [oficial do haskell](https://www.haskell.org/downloads/)
+
+## Uso
+
 O uso do projeto é bem simples graças ao empacotador de dependências cabal, porém alguns porblemas de compatibilidades podem surgir.
 ```bash
 # Atualizando o cabal
@@ -54,6 +56,7 @@ Após isso, a aplicação irá abrir e o jogo estará pronto para ser executado.
 Para se movimentar utilize as setinhas do teclado, e se divirta.
 
 ## Problemas de Compatibilidade Conhecidos
+
 Durante o desenvolvimento da aplicação alguns problemas de compatibilidades dos módulos extras foram encontrados, a seguir se encontram algum deles descritos:
 - **Problemas de versionamento entre os módulos**: A princípio esse problema foi corrigido com a sintaxe `modulo ==X.*`, porém, ainda assim podem ocorrer problemas. Caso isso aconteça, deve-se alterar o arquivo [ProjetoPacman.cabal](https://github.com/UnBParadigmas2022-1/2022.1_G3_Funcional_ProjetoPacman/blob/master/ProjetoPacman.cabal) na seguinte posição
 
@@ -75,7 +78,7 @@ generateRandom :: StdGen -> (Int, Int) -> (Int, StdGen)
 
 ## Vídeo
 Adicione 1 ou mais vídeos com a execução do projeto.
-Procure: 
+Procure:
 (i) Introduzir o projeto;
 (ii) Mostrar passo a passo o código, explicando-o, e deixando claro o que é de terceiros, e o que é contribuição real da equipe;
 (iii) Apresentar particularidades do Paradigma, da Linguagem, e das Tecnologias, e
@@ -84,13 +87,36 @@ OBS: TODOS DEVEM PARTICIPAR, CONFERINDO PONTOS DE VISTA.
 TEMPO: +/- 15min
 
 ## Participações
-|Nome do Membro | Contribuição | Significância da Contribuição para o Projeto (Excelente/Boa/Regular/Ruim/Nula) |
-| -- | -- | -- |
-| Fulano  |  Programação dos Fatos da Base de Conhecimento Lógica | Boa |
 
-## TODO's
+|Nome do Membro | Contribuição | Significância da Contribuição para o Projeto (Excelente/Boa/Regular/Ruim/Nula) |
+| :--:| :--: | :--: |
+| Antonio Aldisio  |  Programação do Algoritmo Dfs | Ruim (Dfs não adequado) |
+
+## Outros
+### Lições Aprendidas
+
+Haskell é estaticamente tipado. Quando compila o programa, o compilador saberá quais partes do código é um número, o que é uma string e assim por diante, ou seja, uma série erros poderão ser capturados em tempo de compilação. Se você tentar adicionar um número a uma string, o compilador irá se queixar de você.
+
+### Contribuições e Fragilidades
+
+O projeto apresentada uma fragilidade no algoritmo Dfs (Depth-first search), pois ele não está implementado corretamente. Ele não consegue retornam o caminho completo que o fantasma deve realizar, ao contrátrio dos outros algoritmos.
+A fragilidade é quando o fantasma chega em um ponto que tem a possibilidade de mais de um caminho ele sempre escolhe o primeiro, sendo assim criando um loop como pode ser visto abaixo:
+<img src="bugDsf.gif" width="400" height="400" />
+
+###  Melhorias Futuras do Trabalho
 Diversas alterações e melhorias ainda podem ser feitas, e a equipe separou algumas interessantes:
+
 - Novas implementas de algoritmos de busca, diversificando a movimentação dos fantasmas.
 - Geração aleatória e automática de fases e labirintos (mapa).
 - Adição do super poder do Pacman e rotas de fuga dos fantasmas.
 - Adição de estratégias mais complexas de perseguição.
+- Possibilidade de "comer" o fantasma.
+- Concerto da implementação do Dfs.
+
+## Fontes
+
+ - Kurt, W., 2018. Get programming with Haskell. Oreilly. Disponível em: <https://oreilly.com/library/view/get-programming-with/9781617293764/kindle_split_001.html>
+
+- Learn You a Haskell for Great Good! Disponível em: <http://learnyouahaskell.com/chapters>
+
+- Aprenda um Haskell para um grande bem!. Disponível em: <https://github.com/taylorrf/learnhaskell>
