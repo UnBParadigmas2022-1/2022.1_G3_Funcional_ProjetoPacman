@@ -7,7 +7,7 @@ import AEstrela
 import Bfs
 import Djikstra
 import Map
-
+import Dfs
 
 drawGhost :: Assets -> Float -> Ghost -> Picture
 drawGhost [_, _, _, _, _, orangeGhost, _] cellSize (x,y, _, _) =
@@ -22,6 +22,7 @@ updateGhost ((px, py), (_, _), _) (x,y, slow, algo) = (newX, -newY, slow, algo)
             | algo == ASTAR = AEstrela.aStar point (px, py)
             | algo == BFS = Bfs.bShortestPath point (px, py)
             | algo == DJK = Djikstra.djikstraPath point (px, py)
+            | algo == DFS = Dfs.dfsShortestPath point (px, py)
             | otherwise = AEstrela.aStar point (px, py)
 
 
