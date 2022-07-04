@@ -8,12 +8,15 @@ import Game.Map ( mapaWidth, mapaHeight, isCellFree )
 import Types
 
 
-drawCoin :: Float -> Assets -> Coin -> Picture
-drawCoin cellSize [_, _, _, _, _, _, coin, _, _] ((x, y), _) =
+drawCoin :: Assets -> Float -> Coin -> Picture
+drawCoin [_, _, _, _, _, _, coin, _, _] cellSize ((x, y), _) =
     translate newX newY coin
     where
         newX = x * cellSize
         newY = y * cellSize
+
+drawCoins :: Coins -> Assets -> CellSize -> Picture
+drawCoins coins assets cellSize = pictures $ map (drawCoin assets cellSize) coins
 
 coinPrice :: Bool -> Int
 coinPrice True = 10
@@ -22,11 +25,15 @@ coinPrice False = 0
 generateRandom :: StdGen -> (Int, Int) -> (Int, StdGen)
 generateRandom seed range = uniformR range seed
 
-updateCoin :: Coin -> Coin
-updateCoin (pos, seed)
-    | isCellFree random = (random, ySeed)
-    | otherwise = updateCoin (pos, ySeed)
+updateCoins :: Coins -> Player -> Coins
+updateCoins coins player = map (updateCoin player) coins
+
+updateCoin :: Player -> Coin -> Coin
+updateCoin player (pos, seed)
+    | randomPosIsFree = (random, ySeed)
+    | otherwise = updateCoin player (pos, ySeed)
     where
         (x, xSeed) = generateRandom seed (0 :: Int, round (mapaWidth-1))
         (y, ySeed) = generateRandom xSeed (0 :: Int, round (mapaHeight-1))
+        randomPosIsFree = isCellFree random
         random = (int2Float x, -(int2Float y))

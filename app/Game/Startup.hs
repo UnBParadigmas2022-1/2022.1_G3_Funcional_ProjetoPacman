@@ -5,7 +5,7 @@ import Graphics.Gloss.Interface.Pure.Game
 
 import Types
 import Game.Map ( mapaHeight, mapaWidth, mapaAtual )
-import System.Random (StdGen)
+import System.Random ( StdGen, mkStdGen )
 
 title = "Pacman"
 
@@ -21,7 +21,13 @@ background  = black                     :: Color
 player      = ((13, 17), (1, 0), 0)     :: Player
 ghost       = (1, -1, -1, ASTAR)        :: Ghost
 ghosts      = [(1, -1, -1, ASTAR), (26, -1, -1, BFS), (26, -29, -1, DJK)] :: Ghosts
-coins       = (13, -11)
+coins       = [
+                ((13, -11), mkStdGen 777), 
+                ((21, -25), mkStdGen 888), 
+                ((12, -25), mkStdGen 555),
+                ((7, -6), mkStdGen 444),
+                ((6, -26), mkStdGen 222),
+                ((23, -5), mkStdGen 111)] :: Coins
 score       = 0
 
 
@@ -33,8 +39,10 @@ assetsName = ["wall", "gold", "diamond", "nether", "player", "orange-ghost", "co
 
 
 loadGame :: Assets -> State -> GameMode -> Algorithm -> StdGen -> Game
-loadGame assets state HARD _ coinSeed = (cellSize, width, height, mapaAtual, assets, player, ghosts, (coins, coinSeed), score, state)
-loadGame assets state SOLO algo coinSeed = (cellSize, width, height, mapaAtual, assets, player, [newGhost], (coins, coinSeed), score, state)
+loadGame assets state HARD _ coinSeed = 
+    (cellSize, width, height, mapaAtual, assets, player, ghosts, coins, score, state)
+loadGame assets state SOLO algo coinSeed = 
+    (cellSize, width, height, mapaAtual, assets, player, [newGhost], coins, score, state)
     where
         (gx, gy, s, _) = ghost
         newGhost = (gx, gy, s, algo)
