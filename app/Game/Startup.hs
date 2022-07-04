@@ -1,11 +1,11 @@
-module Startup where
+module Game.Startup where
 
 import Graphics.Gloss
 import Graphics.Gloss.Interface.Pure.Game
 
 import Types
-import Map
-import System.Random (StdGen, mkStdGen)
+import Game.Map ( mapaHeight, mapaWidth, mapaAtual )
+import System.Random ( StdGen, mkStdGen )
 
 title = "Pacman"
 
@@ -14,8 +14,8 @@ title = "Pacman"
 fps = 5 :: Int
 
 cellSize    = 25                        :: CellSize
-width       = Map.mapaWidth*cellSize    :: Width
-height      = Map.mapaHeight*cellSize   :: Float
+width       = mapaWidth*cellSize    :: Width
+height      = mapaHeight*cellSize   :: Float
 background  = black                     :: Color
 
 player      = ((13, 17), (1, 0), 0)     :: Player
@@ -40,9 +40,9 @@ assetsName = ["wall", "gold", "diamond", "nether", "player", "orange-ghost", "co
 
 loadGame :: Assets -> State -> GameMode -> Algorithm -> StdGen -> Game
 loadGame assets state HARD _ coinSeed = 
-    (cellSize, width, height, Map.mapaAtual, assets, player, ghosts, coins, score, state)
+    (cellSize, width, height, mapaAtual, assets, player, ghosts, coins, score, state)
 loadGame assets state SOLO algo coinSeed = 
-    (cellSize, width, height, Map.mapaAtual, assets, player, [newGhost], coins, score, state)
+    (cellSize, width, height, mapaAtual, assets, player, [newGhost], coins, score, state)
     where
         (gx, gy, s, _) = ghost
         newGhost = (gx, gy, s, algo)

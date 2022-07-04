@@ -1,11 +1,11 @@
-module AEstrela (aStar) where
+module Algorithms.AEstrela (aStar) where
 
 import Data.Heap
 import Data.List
 import Graphics.Gloss
 
 import Types
-import Map
+import Game.Map
 import Types
 
 type Valor = (Int, MultValor)

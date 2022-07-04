@@ -1,9 +1,9 @@
-module Bfs (bShortestPath) where
+module Algorithms.Bfs (bShortestPath) where
 
 import Graphics.Gloss
 import Data.List
 
-import Map
+import Game.Map
 import Types
 
 bShortestPath :: Point -> Point -> Point

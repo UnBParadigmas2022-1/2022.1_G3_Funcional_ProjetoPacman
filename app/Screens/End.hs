@@ -1,4 +1,4 @@
-module End where
+module Screens.End where
 
 import Graphics.Gloss
 import Graphics.Gloss.Interface.Pure.Game

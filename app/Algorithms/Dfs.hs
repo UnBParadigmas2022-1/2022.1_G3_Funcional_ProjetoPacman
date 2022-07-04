@@ -1,9 +1,9 @@
-module Dfs where
+module Algorithms.Dfs where
 
 import Graphics.Gloss
 import Data.List
 
-import Map
+import Game.Map
 import Types
 
 dfsShortestPath :: Point -> Point -> Point

@@ -1,4 +1,4 @@
-module Map where
+module Game.Map where
 
 import Graphics.Gloss
 import Graphics.Gloss.Interface.Pure.Game

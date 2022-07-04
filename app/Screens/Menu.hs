@@ -1,4 +1,4 @@
-module Menu where
+module Screens.Menu where
 
 import Graphics.Gloss
 import Graphics.Gloss.Interface.Pure.Game
@@ -6,7 +6,7 @@ import Graphics.Gloss.Interface.Pure.Game
 import System.Random
 
 import Types
-import Startup
+import Game.Startup ( loadGame )
 
 
 -- Draw
@@ -41,7 +41,7 @@ menuInputHandler event (cellSize, width, height, mapa, assets, player, ghosts, c
     where
         coinSeed = mkStdGen 777
         (newState, newAlgo, gameMode) = menuEventHandler event state
-        newGame = Startup.loadGame assets newState gameMode newAlgo coinSeed
+        newGame = loadGame assets newState gameMode newAlgo coinSeed
          
 
 menuEventHandler :: Event -> State -> (State, Algorithm, GameMode)

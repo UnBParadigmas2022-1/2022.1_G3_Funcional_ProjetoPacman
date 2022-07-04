@@ -1,12 +1,11 @@
-module Coin where
+module Game.Coin where
 
 import System.Random
 import Graphics.Gloss
-import GHC.Float (int2Float)
+import GHC.Float ( int2Float )
 
-import Map
+import Game.Map ( mapaWidth, mapaHeight, isCellFree )
 import Types
-import Player
 
 
 drawCoin :: Assets -> Float -> Coin -> Picture
@@ -34,7 +33,7 @@ updateCoin player (pos, seed)
     | randomPosIsFree = (random, ySeed)
     | otherwise = updateCoin player (pos, ySeed)
     where
-        (x, xSeed) = generateRandom seed (0 :: Int, round (Map.mapaWidth-1))
-        (y, ySeed) = generateRandom xSeed (0 :: Int, round (Map.mapaHeight-1))
+        (x, xSeed) = generateRandom seed (0 :: Int, round (mapaWidth-1))
+        (y, ySeed) = generateRandom xSeed (0 :: Int, round (mapaHeight-1))
         randomPosIsFree = isCellFree random
         random = (int2Float x, -(int2Float y))

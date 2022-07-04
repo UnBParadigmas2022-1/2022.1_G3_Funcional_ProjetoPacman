@@ -4,29 +4,38 @@ import Graphics.Gloss
 import Graphics.Gloss.Interface.Pure.Game
 import System.Random
 
-import Startup
-import Game
+import Game.Startup ( 
+    width, 
+    height, 
+    loadAssets, 
+    loadGame, 
+    background, 
+    fps, 
+    startY, 
+    startX,
+    title)
+import Game.Game ( updateGame, drawGame, gameInputHandler )
 import Types
-import Menu
-import End
+import Screens.Menu
+import Screens.End
 
 window :: Display
 window = InWindow title (iwidth, iheight) (0, 0)
     where
-        iwidth  = round Startup.width
-        iheight = round Startup.height
+        iwidth  = round width
+        iheight = round height
 
 
 main :: IO ()
 main = do
-    assets <- Startup.loadAssets
+    assets <- loadAssets
     let coinSeed = mkStdGen 777
-    let game = Startup.loadGame assets MENU SOLO DFS coinSeed
+    let game = loadGame assets MENU SOLO DFS coinSeed
 
     play
         window
-        Startup.background
-        Startup.fps
+        background
+        fps
         game
         drawingFunc
         inputHandler
@@ -35,14 +44,14 @@ main = do
 
 drawingFunc :: Game -> Picture
 drawingFunc (cellSize, width, height, mapa, assets, player, ghosts, coin, score, GAME) =
-    translate Startup.startX Startup.startY (drawGame (cellSize, width, height, mapa, assets, player, ghosts, coin, score, GAME))
+    translate startX startY (drawGame (cellSize, width, height, mapa, assets, player, ghosts, coin, score, GAME))
 drawingFunc (cellSize, width, height, mapa, assets, player, ghosts, coin, score, END) = drawEnd width score
 drawingFunc (cellSize, width, height, mapa, assets, player, ghosts, coin, score, state) = drawMenu width title state
 
 
 updateFunc :: Float -> Game -> Game
 updateFunc dt (cellSize, width, height, mapa, assets, player, ghosts, coin, score, GAME) =
-    Game.updateGame dt (cellSize, width, height, mapa, assets, player, ghosts, coin, score, GAME) 
+    updateGame dt (cellSize, width, height, mapa, assets, player, ghosts, coin, score, GAME) 
 updateFunc dt game = game
 
 
