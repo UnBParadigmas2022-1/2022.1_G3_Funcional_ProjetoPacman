@@ -90,7 +90,7 @@ TEMPO: +/- 15min
 
 |Nome do Membro | Contribuição | Significância da Contribuição para o Projeto (Excelente/Boa/Regular/Ruim/Nula) |
 | :--:| :--: | :--: |
-| Antonio Aldisio  |  Algoritmo Dfs | Regular (Dfs não adaptado) |
+| Antonio Aldisio  |  Algoritmo Dfs | Regular |
 | Rafael Ramos  | Algoritmo Bfs | Boa |
 | Thiago Paiva  |  Menu, Modos de jogo e Mapa | Excelente |
 | João Pedro Moura | Algoritmo A*, Fluxo com a Tela Final e Colisões do player | Excelente |
