@@ -90,17 +90,20 @@ TEMPO: +/- 15min
 
 |Nome do Membro | Contribuição | Significância da Contribuição para o Projeto (Excelente/Boa/Regular/Ruim/Nula) |
 | :--:| :--: | :--: |
-| Antonio Aldisio  |  Programação do Algoritmo Dfs | Regular (Dfs não adaptado) |
+| Antonio Aldisio  |  Algoritmo Dfs | Regular (Dfs não adaptado) |
 | Rafael Ramos  | Algoritmo Bfs | Boa |
 | Thiago Paiva  |  Menu, Modos de jogo e Mapa | Excelente |
 | João Pedro Moura | Algoritmo A*, Fluxo com a Tela Final e Colisões do player | Excelente |
 | Lucas Gomes | Algoritmo de Djikstra | Boa |
+| Lucas Boaventura | Módulo de Moeda (Draw/Update) e pontuação | Boa |
 
 
 ## Outros
 ### Lições Aprendidas
 
 Haskell é estaticamente tipado. Quando compila o programa, o compilador saberá quais partes do código é um número, o que é uma string e assim por diante. Ou seja, uma série de erros pode ser capturada em tempo de compilação. Se você tentar adicionar um número a uma string, o compilador irá se queixar de você.
+
+O Haskell é fortemente tipado e foi bastante trabalhoso sempre que precisava resolver conflitos ao realizar um merge entre branches. É importantíssimo que a pessoa que estava trabalhando em uma branch mantesse ela o mais atualizada possível com a master.
 
 ### Contribuições e Fragilidades
 
@@ -119,12 +122,13 @@ Diversas alterações e melhorias ainda podem ser feitas, e a equipe separou alg
 - Adição de estratégias mais complexas de perseguição.
 - Possibilidade de "comer" o fantasma.
 - Adaptação da implementação do Dfs.
+- Inclusão de diferentes pontuações para as moedas e novos modos de jogo.
 
 ## Fontes
 
 - Inpirado em: Labirinto do Hoglin. Disponível em: <https://github.com/projeto-de-algoritmos/Final_LabirintoDoHoglin>
 
- - Kurt, W., 2018. Get programming with Haskell. Oreilly. Disponível em: <https://oreilly.com/library/view/get-programming-with/9781617293764/kindle_split_001.html>
+- Kurt, W., 2018. Get programming with Haskell. Oreilly. Disponível em: <https://oreilly.com/library/view/get-programming-with/9781617293764/kindle_split_001.html>
 
 - Learn You a Haskell for Great Good! Disponível em: <http://learnyouahaskell.com/chapters>
 
