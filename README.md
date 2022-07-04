@@ -94,11 +94,13 @@ TEMPO: +/- 15min
 | Rafael Ramos  | Algoritmo Bfs | Boa |
 | Thiago Paiva  |  Menu, Modos de jogo e Mapa | Excelente |
 | João Pedro Moura | Algoritmo A*, Fluxo com a Tela Final e Colisões do player | Excelente |
+| Lucas Gomes | Algoritmo de Djikstra | Boa |
+
 
 ## Outros
 ### Lições Aprendidas
 
-Haskell é estaticamente tipado. Quando compila o programa, o compilador saberá quais partes do código é um número, o que é uma string e assim por diante, ou seja, uma série erros poderão ser capturados em tempo de compilação. Se você tentar adicionar um número a uma string, o compilador irá se queixar de você.
+Haskell é estaticamente tipado. Quando compila o programa, o compilador saberá quais partes do código é um número, o que é uma string e assim por diante. Ou seja, uma série de erros pode ser capturada em tempo de compilação. Se você tentar adicionar um número a uma string, o compilador irá se queixar de você.
 
 ### Contribuições e Fragilidades
 
