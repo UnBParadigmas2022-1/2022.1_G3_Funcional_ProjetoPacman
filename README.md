@@ -77,27 +77,20 @@ generateRandom :: StdGen -> (Int, Int) -> (Int, StdGen)
 ```
 
 ## Vídeo
-Adicione 1 ou mais vídeos com a execução do projeto.
-Procure:
-(i) Introduzir o projeto;
-(ii) Mostrar passo a passo o código, explicando-o, e deixando claro o que é de terceiros, e o que é contribuição real da equipe;
-(iii) Apresentar particularidades do Paradigma, da Linguagem, e das Tecnologias, e
-(iV) Apresentar lições aprendidas, contribuições, pendências, e ideias para trabalhos futuros.
-OBS: TODOS DEVEM PARTICIPAR, CONFERINDO PONTOS DE VISTA.
-TEMPO: +/- 15min
+https://youtu.be/WezdMQSgur4
 
 ## Participações
 
 |Nome do Membro | Contribuição | Significância da Contribuição para o Projeto (Excelente/Boa/Regular/Ruim/Nula) |
 | :--:| :--: | :--: |
-| Antonio Aldisio  |  Algoritmo Dfs | Regular |
-| Rafael Ramos  | Algoritmo Bfs | Boa |
+| Antonio Aldisio  |  Algoritmo Dfs | Boa |
+| Rafael Ramos  | Algoritmo Bfs | Excelente |
 | Thiago Paiva  |  Menu, Modos de jogo e Mapa | Excelente |
 | João Pedro Moura | Algoritmo A*, Fluxo com a Tela Final e Colisões do player | Excelente |
-| Lucas Gomes | Algoritmo de Djikstra | Boa |
-| Lucas Boaventura | Módulo de Moeda (Draw/Update) e pontuação | Boa |
-| Dafne Moretti | Módulo de Ghosts (Draw/Update) e slow | Boa |
-| Igor Lima | Módulo do Player (Draw/Update/Input) | Boa |
+| Lucas Gomes | Algoritmo de Djikstra | Excelente |
+| Lucas Boaventura | Módulo de Moeda (Draw/Update) e pontuação | Excelente |
+| Dafne Moretti | Módulo de Ghosts (Draw/Update) e slow | Excelente |
+| Igor Lima | Módulo do Player (Draw/Update/Input) | Excelente |
 
 ## Outros
 ### Lições Aprendidas
