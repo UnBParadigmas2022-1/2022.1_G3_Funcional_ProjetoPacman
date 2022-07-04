@@ -1,10 +1,10 @@
-module Djikstra (djikstraPath) where
+module Algorithms.Djikstra (djikstraPath) where
 
 import Data.Heap
 import Data.List
 import Graphics.Gloss
 
-import Map
+import Game.Map
 import Types
 
 type Valor = (Point, Point)

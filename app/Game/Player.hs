@@ -1,9 +1,9 @@
-module Player where
+module Game.Player where
 
 import Graphics.Gloss
 import Graphics.Gloss.Interface.Pure.Game
 
-import Map
+import Game.Map ( isTunnel, isWallCell, mapaWidth )
 import Types (Assets, CellSize, Player, Game)
 
 
@@ -23,14 +23,14 @@ anglePlayer (sx, sy) angle
 
 updatePlayer :: Player -> Player
 updatePlayer ((x, y), (sx, sy), angle)
-    | Map.isTunnel (x+sx, y+sy)     = (jumpPlayer ((x, y), (sx, sy), anglePlayer (sx, sy) angle))
-    | Map.isWallCell (x+sx, y+sy)   = ((x, y), (0, 0), anglePlayer (sx, sy) angle)
+    | isTunnel (x+sx, y+sy)     = (jumpPlayer ((x, y), (sx, sy), anglePlayer (sx, sy) angle))
+    | isWallCell (x+sx, y+sy)   = ((x, y), (0, 0), anglePlayer (sx, sy) angle)
     | otherwise                     = ((x+sx, y+sy), (sx, sy), anglePlayer (sx, sy) angle)
 
 jumpPlayer :: Player -> Player
 jumpPlayer ((x, y), (sx, sy), angle)
     | sx > 0    = ((0, y), (sx, sy), angle)
-    | sx < 0    = ((Map.mapaWidth-1, y), (sx, sy), angle)
+    | sx < 0    = ((mapaWidth-1, y), (sx, sy), angle)
     | otherwise = ((x, y), (sx, sy), angle)
 
 inputPlayer :: Event -> Player -> Player
@@ -42,7 +42,7 @@ inputPlayer _ player = player
 
 movePlayer :: Point -> Player -> Player
 movePlayer (nsx, nsy) ((x, y), (sx, sy), angle)
-    | Map.isWallCell (x+nsx, y+nsy) = ((x, y), (sx, sy), angle)
+    | isWallCell (x+nsx, y+nsy) = ((x, y), (sx, sy), angle)
     | otherwise = ((x, y), (nsx, nsy), angle)
 
 hasCollision :: Player -> [Point] -> Bool

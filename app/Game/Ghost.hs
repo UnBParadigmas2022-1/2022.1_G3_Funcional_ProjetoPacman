@@ -1,13 +1,13 @@
-module Ghost where
+module Game.Ghost where
 
 import Graphics.Gloss
 
 import Types
-import AEstrela
-import Bfs
-import Djikstra
-import Map
-import Dfs
+import Algorithms.AEstrela ( aStar )
+import Algorithms.Bfs ( bShortestPath )
+import Algorithms.Djikstra ( djikstraPath )
+import Algorithms.Dfs ( dfsShortestPath )
+import Game.Map
 
 ghostImage :: Assets -> Algorithm -> Picture
 ghostImage [_, _, _, _, _, orangeGhost, _, _, _] BFS = orangeGhost
@@ -23,11 +23,11 @@ updateGhost ((px, py), (_, _), _) (x,y, slow, algo) = (newX, -newY, slow, algo)
     where
         point = (x,abs(y))
         (newX, newY)
-            | algo == ASTAR = AEstrela.aStar point (px, py)
-            | algo == BFS = Bfs.bShortestPath point (px, py)
-            | algo == DJK = Djikstra.djikstraPath point (px, py)
-            | algo == DFS = Dfs.dfsShortestPath point (px, py)
-            | otherwise = AEstrela.aStar point (px, py)
+            | algo == ASTAR = aStar point (px, py)
+            | algo == BFS = bShortestPath point (px, py)
+            | algo == DJK = djikstraPath point (px, py)
+            | algo == DFS = dfsShortestPath point (px, py)
+            | otherwise = aStar point (px, py)
 
 
 drawGhosts :: Ghosts -> Assets -> CellSize -> Picture 
@@ -40,9 +40,9 @@ updateGhosts ghosts player = map (updateGhostSlow player) ghosts
 
 updateGhostSlow :: Player -> Ghost -> Ghost
 updateGhostSlow player (x, y, slow, algo)
-    | actualValue == 1, slow == 0  = Ghost.updateGhost player (x, y, -1, algo)
+    | actualValue == 1, slow == 0 = updateGhost player (x, y, -1, algo)
     | actualValue > 1, slow < 0 = (x, y, actualValue, algo)
     | slow > 0 = (x, y, slow - 1, algo)
-    | otherwise = Ghost.updateGhost player (x, y, slow, algo)
+    | otherwise = updateGhost player (x, y, slow, algo)
     where   
         actualValue = getCellValue(x,y)

@@ -1,4 +1,4 @@
-module Scoreboard where
+module Screens.Scoreboard where
 
 import Graphics.Gloss
 import Graphics.Gloss.Interface.Pure.Game
