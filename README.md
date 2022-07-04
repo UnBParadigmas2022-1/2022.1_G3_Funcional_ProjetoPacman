@@ -119,9 +119,8 @@ Diversas alterações e melhorias ainda podem ser feitas, e a equipe separou alg
 
 - Novas implementações de algoritmos de busca, diversificando a movimentação dos fantasmas.
 - Geração aleatória e automática de fases e labirintos (mapa).
-- Adição do super poder do Pacman e rotas de fuga dos fantasmas.
-- Adição de estratégias mais complexas de perseguição.
-- Possibilidade de "comer" o fantasma.
+- Adição do super poder do Pacman e rotas de fuga dos fantasmas. Exemplo: Possibilidade de "comer" o fantasma.
+- Adição de estratégias mais complexas de perseguição. 
 - Adaptação da implementação do Dfs.
 - Inclusão de diferentes pontuações para as moedas e novos modos de jogo.
 
