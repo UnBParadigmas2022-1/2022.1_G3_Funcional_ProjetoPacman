@@ -96,7 +96,7 @@ TEMPO: +/- 15min
 | João Pedro Moura | Algoritmo A*, Fluxo com a Tela Final e Colisões do player | Excelente |
 | Lucas Gomes | Algoritmo de Djikstra | Boa |
 | Lucas Boaventura | Módulo de Moeda (Draw/Update) e pontuação | Boa |
-
+| Dafne Moretti | Módulo de Ghosts (Draw/Update) e slow | Boa |
 
 ## Outros
 ### Lições Aprendidas
