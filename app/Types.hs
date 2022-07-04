@@ -39,6 +39,7 @@ type Assets = [Picture]
 type Ghost = (Float, Float, Float, Algorithm)
 type Ghosts = [Ghost]
 type Coin = (Point, StdGen)
+type Coins = [Coin]
 type Score = Int
 
-type Game = (CellSize, Width, Height, Mapa, Assets, Player, Ghosts, Coin, Score, State)
+type Game = (CellSize, Width, Height, Mapa, Assets, Player, Ghosts, Coins, Score, State)
