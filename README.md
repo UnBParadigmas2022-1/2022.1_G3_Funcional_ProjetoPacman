@@ -91,6 +91,7 @@ TEMPO: +/- 15min
 |Nome do Membro | Contribuição | Significância da Contribuição para o Projeto (Excelente/Boa/Regular/Ruim/Nula) |
 | :--:| :--: | :--: |
 | Antonio Aldisio  |  Programação do Algoritmo Dfs | Regular (Dfs não adaptado) |
+| Rafael Ramos  | Algoritmo Bfs | Boa |
 | Thiago Paiva  |  Menu, Modos de jogo e Mapa | Excelente |
 
 ## Outros
