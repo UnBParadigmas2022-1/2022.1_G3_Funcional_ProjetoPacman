@@ -93,6 +93,7 @@ TEMPO: +/- 15min
 | Antonio Aldisio  |  Programação do Algoritmo Dfs | Regular (Dfs não adaptado) |
 | Rafael Ramos  | Algoritmo Bfs | Boa |
 | Thiago Paiva  |  Menu, Modos de jogo e Mapa | Excelente |
+| João Pedro Moura | Algoritmo A*, Fluxo com a Tela Final e Colisões do player | Excelente |
 
 ## Outros
 ### Lições Aprendidas
