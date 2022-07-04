@@ -8,7 +8,7 @@ import Types (Assets, CellSize, Player, Game)
 
 
 drawPlayer :: Assets -> CellSize -> Player -> Picture
-drawPlayer [_, _, _, _, player, _, _] cellSize ((x, y), (sx, sy), angle) =
+drawPlayer [_, _, _, _, player, _, _, _, _] cellSize ((x, y), (sx, sy), angle) =
     translate (cellSize*x) (-cellSize*y) $ scale 1 (mirror) $ rotate angle player
     where
         mirror = fromInteger $ ceiling $ (sin angle) + (cos angle)
