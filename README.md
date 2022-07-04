@@ -40,7 +40,7 @@ O haskell pode ser baixado em conjunto com o ghci (e o cabal) através dos links
 
 ## Uso
 
-O uso do projeto é bem simples graças ao empacotador de dependências cabal, porém alguns porblemas de compatibilidades podem surgir.
+O uso do projeto é bem simples graças ao empacotador de dependências cabal, porém alguns problemas de compatibilidades podem surgir. Assim, é altamente recomendado utilizar ambiente linux.
 ```bash
 # Atualizando o cabal
 $ cabal update
@@ -90,7 +90,8 @@ TEMPO: +/- 15min
 
 |Nome do Membro | Contribuição | Significância da Contribuição para o Projeto (Excelente/Boa/Regular/Ruim/Nula) |
 | :--:| :--: | :--: |
-| Antonio Aldisio  |  Programação do Algoritmo Dfs | Ruim (Dfs não adequado) |
+| Antonio Aldisio  |  Programação do Algoritmo Dfs | Regular (Dfs não adaptado) |
+| Thiago Paiva  |  Menu, Modos de jogo e Mapa | Excelente |
 
 ## Outros
 ### Lições Aprendidas
@@ -99,8 +100,7 @@ Haskell é estaticamente tipado. Quando compila o programa, o compilador saberá
 
 ### Contribuições e Fragilidades
 
-O projeto apresentada uma fragilidade no algoritmo Dfs (Depth-first search), pois ele não está implementado corretamente. Ele não consegue retornam o caminho completo que o fantasma deve realizar, ao contrátrio dos outros algoritmos.
-A fragilidade é quando o fantasma chega em um ponto que tem a possibilidade de mais de um caminho ele sempre escolhe o primeiro, sendo assim criando um loop como pode ser visto abaixo:
+O projeto apresentada uma fragilidade no algoritmo Dfs (Depth-first search), pois ele não está adaptado corretamente. Como o DFS retorna o primeiro caminho que ele encontra e o grafo do mapa é circular e fechado, então o fantasma sempre vai para a primeira célula que ele analisa, impossibilitando a perseguição. Para resolver esse problema, teria que implementar estratégias para limitar a profundeza da análise de cada célula, que são complexas e levaria mais tempo do que o planejado. O problema pode ser visto no gif abaixo:
 
 <p>
 <img src="bugDsf.gif" width="400" height="400" />
@@ -109,14 +109,16 @@ A fragilidade é quando o fantasma chega em um ponto que tem a possibilidade de 
 ###  Melhorias Futuras do Trabalho
 Diversas alterações e melhorias ainda podem ser feitas, e a equipe separou algumas interessantes:
 
-- Novas implementas de algoritmos de busca, diversificando a movimentação dos fantasmas.
+- Novas implementações de algoritmos de busca, diversificando a movimentação dos fantasmas.
 - Geração aleatória e automática de fases e labirintos (mapa).
 - Adição do super poder do Pacman e rotas de fuga dos fantasmas.
 - Adição de estratégias mais complexas de perseguição.
 - Possibilidade de "comer" o fantasma.
-- Concerto da implementação do Dfs.
+- Adaptação da implementação do Dfs.
 
 ## Fontes
+
+- Inpirado em: Labirinto do Hoglin. Disponível em: <https://github.com/projeto-de-algoritmos/Final_LabirintoDoHoglin>
 
  - Kurt, W., 2018. Get programming with Haskell. Oreilly. Disponível em: <https://oreilly.com/library/view/get-programming-with/9781617293764/kindle_split_001.html>
 
