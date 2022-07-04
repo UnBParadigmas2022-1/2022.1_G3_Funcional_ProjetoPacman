@@ -29,7 +29,7 @@ score       = 0
 startX = (cellSize - width)  / 2.0
 startY = (height - cellSize) / 2.0
 
-assetsName = ["wall", "gold", "diamond", "nether", "player", "orange-ghost", "coin", "pink-ghost", "blue-ghost", "orange-ghost"]
+assetsName = ["wall", "gold", "diamond", "nether", "player", "orange-ghost", "coin", "pink-ghost", "blue-ghost"]
 
 
 loadGame :: Assets -> State -> GameMode -> Algorithm -> StdGen -> Game
