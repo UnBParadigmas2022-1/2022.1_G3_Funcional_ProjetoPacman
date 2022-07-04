@@ -97,6 +97,7 @@ TEMPO: +/- 15min
 | Lucas Gomes | Algoritmo de Djikstra | Boa |
 | Lucas Boaventura | Módulo de Moeda (Draw/Update) e pontuação | Boa |
 | Dafne Moretti | Módulo de Ghosts (Draw/Update) e slow | Boa |
+| Igor Lima | Módulo do Player (Draw/Update/Input) | Boa |
 
 ## Outros
 ### Lições Aprendidas
