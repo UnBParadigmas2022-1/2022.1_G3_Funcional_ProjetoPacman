@@ -9,7 +9,7 @@ import Types
 
 
 drawCoin :: Float -> Assets -> Coin -> Picture
-drawCoin cellSize [_, _, _, _, _, _, coin] ((x, y), _) =
+drawCoin cellSize [_, _, _, _, _, _, coin, _, _] ((x, y), _) =
     translate newX newY coin
     where
         newX = x * cellSize
