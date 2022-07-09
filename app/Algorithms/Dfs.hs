@@ -1,10 +1,10 @@
 module Algorithms.Dfs where
 
-import Graphics.Gloss
-import Data.List
+import Graphics.Gloss ( Point )
+import Data.List ( (\\) )
 
-import Game.Map
-import Types
+import Game.Map ( freeAdjsPoints, generateNext )
+import Types ( MultValor )
 
 dfsShortestPath :: Point -> Point -> Point
 dfsShortestPath initialPos goalPos = nextPos

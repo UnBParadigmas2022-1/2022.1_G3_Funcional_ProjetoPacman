@@ -1,9 +1,11 @@
 module Screens.Scoreboard where
 
 import Graphics.Gloss
+    ( Picture, white, color, scale, text, translate )
 import Graphics.Gloss.Interface.Pure.Game
+    ( Picture, white, color, scale, text, translate )
 
-import Types
+import Types ( Height, Score )
 
 
 drawScoreboard :: Height -> Score -> Picture

@@ -1,8 +1,9 @@
 module Main where
 
 import Graphics.Gloss
-import Graphics.Gloss.Interface.Pure.Game
-import System.Random
+    ( Picture, translate, play, Display(InWindow) )
+import Graphics.Gloss.Interface.Pure.Game ( Event )
+import System.Random ( mkStdGen )
 
 import Game.Startup ( 
     width, 
@@ -16,8 +17,9 @@ import Game.Startup (
     title)
 import Game.Game ( updateGame, drawGame, gameInputHandler )
 import Types
-import Screens.Menu
-import Screens.End
+    ( Algorithm(DFS), Game, GameMode(SOLO), State(END, MENU, GAME) )
+import Screens.Menu ( drawMenu, menuInputHandler )
+import Screens.End ( drawEnd, endInputHandler )
 
 window :: Display
 window = InWindow title (iwidth, iheight) (0, 0)

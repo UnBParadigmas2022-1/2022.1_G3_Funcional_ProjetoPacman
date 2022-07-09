@@ -1,11 +1,18 @@
 module Screens.Menu where
 
 import Graphics.Gloss
+    ( Picture, red, white, color, pictures, scale, text, translate )
 import Graphics.Gloss.Interface.Pure.Game
+    ( Event(EventKey), Key(Char), KeyState(Up, Down) )
 
-import System.Random
+import System.Random ( mkStdGen )
 
 import Types
+    ( Algorithm(..),
+      Game,
+      GameMode(..),
+      State(GAME, MENU, MENU_SOLO),
+      Width )
 import Game.Startup ( loadGame )
 
 

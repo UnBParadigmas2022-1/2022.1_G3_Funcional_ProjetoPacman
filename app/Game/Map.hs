@@ -1,14 +1,20 @@
 module Game.Map where
 
 import Graphics.Gloss
-import Graphics.Gloss.Interface.Pure.Game
-import Data.Fixed
+    ( Picture, Point, black, color, rectangleSolid, translate )
+import Graphics.Gloss.Interface.Pure.Game ()
+import Data.Fixed ( mod' )
 
-import Types
+import Types ( Assets, Cell, CellSize, Mapa, MultValor, Width )
 
 
+mapaWidth :: Float
 mapaWidth  = 28      :: Float
+
+mapaHeight :: Float
 mapaHeight = 31      :: Float
+
+mapaLength :: Int
 mapaLength = round (mapaWidth * mapaHeight)
 
 mapaAtual :: Mapa

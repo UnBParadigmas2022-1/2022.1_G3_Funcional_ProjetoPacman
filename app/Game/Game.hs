@@ -1,17 +1,18 @@
 module Game.Game where
 
-import Graphics.Gloss
-import Graphics.Gloss.Interface.Pure.Game
+import Graphics.Gloss ( Picture, pictures )
+import Graphics.Gloss.Interface.Pure.Game ( Event )
 
-import Types
+import Types ( Game, State(GAME, END) )
 import Game.Map ( drawMapa )
 import Game.Player ( drawPlayer, updatePlayer, inputPlayer, hasCollision ) 
 import Game.Ghost ( drawGhosts, updateGhosts )
 import Game.Coin ( drawCoins, updateCoins, coinPrice )
 
-import Screens.Scoreboard
+import Screens.Scoreboard ( drawScoreboard )
 
 
+-- drawGame :: Game -> Picture
 drawGame :: Game -> Picture
 drawGame (cellSize, width, height, mapa, assets, player, ghosts, coins, score, state) = 
     pictures $ dMap ++ [dPlayer] ++ [dGhost] ++ [dCoin] ++ [dScoreboard]

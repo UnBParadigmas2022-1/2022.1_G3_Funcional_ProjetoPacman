@@ -1,7 +1,11 @@
 module Game.Player where
 
-import Graphics.Gloss
+import Graphics.Gloss ( Picture, Point, rotate, scale, translate )
 import Graphics.Gloss.Interface.Pure.Game
+    ( Event(EventKey),
+      Key(SpecialKey),
+      KeyState(Down),
+      SpecialKey(KeyRight, KeyUp, KeyDown, KeyLeft) )
 
 import Game.Map ( isTunnel, isWallCell, mapaWidth )
 import Types (Assets, CellSize, Player, Game)
