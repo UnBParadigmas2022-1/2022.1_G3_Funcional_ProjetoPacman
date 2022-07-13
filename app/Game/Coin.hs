@@ -1,11 +1,11 @@
 module Game.Coin where
 
-import System.Random
-import Graphics.Gloss
+import System.Random ( StdGen, uniformR )
+import Graphics.Gloss ( Picture, pictures, translate )
 import GHC.Float ( int2Float )
 
 import Game.Map ( mapaWidth, mapaHeight, isCellFree )
-import Types
+import Types ( Assets, CellSize, Coin, Coins, Player )
 
 
 drawCoin :: Assets -> Float -> Coin -> Picture

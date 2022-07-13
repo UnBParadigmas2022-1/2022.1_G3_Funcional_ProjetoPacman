@@ -1,12 +1,12 @@
 module Algorithms.AEstrela (aStar) where
 
-import Data.Heap
-import Data.List
-import Graphics.Gloss
+import Data.Heap ( insert, null, view, empty, MinPrioHeap )
+import Data.List ( (\\) )
+import Graphics.Gloss ( Point )
 
-import Types
+import Types ( Mapa, MultValor )
 import Game.Map
-import Types
+    ( freeAdjsPoints, generateNext, getCellValue, mapaAtual )
 
 type Valor = (Int, MultValor)
 

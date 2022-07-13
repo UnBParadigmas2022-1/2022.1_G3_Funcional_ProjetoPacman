@@ -1,10 +1,10 @@
 module Algorithms.Bfs (bShortestPath) where
 
-import Graphics.Gloss
-import Data.List
+import Graphics.Gloss ( Point )
+import Data.List ( (\\) )
 
-import Game.Map
-import Types
+import Game.Map ( freeAdjsPoints, generateNext )
+import Types ( MultValor )
 
 bShortestPath :: Point -> Point -> Point
 bShortestPath initialPos goalPos = nextPos

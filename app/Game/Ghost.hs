@@ -1,13 +1,14 @@
 module Game.Ghost where
 
-import Graphics.Gloss
+import Graphics.Gloss ( Picture, pictures, translate )
 
 import Types
+    ( Algorithm(..), Assets, CellSize, Ghost, Ghosts, Player )
 import Algorithms.AEstrela ( aStar )
 import Algorithms.Bfs ( bShortestPath )
 import Algorithms.Djikstra ( djikstraPath )
 import Algorithms.Dfs ( dfsShortestPath )
-import Game.Map
+import Game.Map ( getCellValue )
 
 ghostImage :: Assets -> Algorithm -> Picture
 ghostImage [_, _, _, _, _, orangeGhost, _, _, _] BFS = orangeGhost

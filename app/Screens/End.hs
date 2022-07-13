@@ -1,9 +1,11 @@
 module Screens.End where
 
 import Graphics.Gloss
+    ( Picture, white, yellow, color, pictures, scale, text, translate )
 import Graphics.Gloss.Interface.Pure.Game
+    ( Event(EventKey), Key(Char), KeyState(Up, Down) )
 
-import Types
+import Types ( Game, State(MENU), Width )
 
 -- Draw
 drawEnd :: Width -> Int -> Picture

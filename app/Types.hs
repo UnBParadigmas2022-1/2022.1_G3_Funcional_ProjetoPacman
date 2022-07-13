@@ -1,8 +1,8 @@
 module Types where
 
-import Graphics.Gloss
-import Data.List
-import System.Random
+import Graphics.Gloss ( Picture, Point )
+import Data.List ()
+import System.Random ( StdGen )
 
 
 data State =

@@ -1,11 +1,12 @@
 module Algorithms.Djikstra (djikstraPath) where
 
-import Data.Heap
-import Data.List
-import Graphics.Gloss
+import Data.Heap ( insert, null, view, empty, MinPrioHeap )
+import Data.List ( (\\) )
+import Graphics.Gloss ( Point )
 
 import Game.Map
-import Types
+    ( freeAdjsPoints, generateNext, mapaAtual, point2Index )
+import Types ( Mapa, MultValor )
 
 calcCaminho :: Mapa -> [MultValor] -> Point -> MinPrioHeap Float MultValor -> (MultValor, MinPrioHeap Float MultValor)
 calcCaminho mapa visitados posInicial heap = do
