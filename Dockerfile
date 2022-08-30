@@ -1,15 +1,12 @@
-FROM haskell
-
-MAINTAINER Antonio Aldisio <aldisiofilho@gmail.com>
+FROM ubuntu:latest
 
 COPY . pacman
 
 WORKDIR /pacman
 
-RUN apt-get update -y && \
-    apt-get install -y libghc-openglraw-dev  && \
-    apt-get install -y libghc-gluraw-dev && \
-    cabal update && \
-    cabal install
+RUN apt-get update -y
+RUN apt-get install -y xauth
+RUN apt-get install -y haskell-platform cabal-install
+RUN cabal update && cabal v2-build
 
-ENTRYPOINT ["cabal run"]
+ENTRYPOINT ["cabal", "run"]
