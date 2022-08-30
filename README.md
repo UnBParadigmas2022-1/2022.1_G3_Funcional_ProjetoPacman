@@ -38,6 +38,13 @@ A ideia do projeto é baseada do projeto final de um dos integrantes do grupo: [
 
 O haskell pode ser baixado em conjunto com o ghci (e o cabal) através dos links dispostos, ou através dos pacotes oficiais de cada distro, na página [oficial do haskell](https://www.haskell.org/downloads/)
 
+## Docker
+É possivel, também, executar o projeto utilizando o docker com o X11Forwarding para executar a solução gráfica.
+```
+$ make build
+$ make run
+```
+
 ## Uso
 
 O uso do projeto é bem simples graças ao empacotador de dependências cabal, porém alguns problemas de compatibilidades podem surgir. Assim, é altamente recomendado utilizar ambiente linux.
