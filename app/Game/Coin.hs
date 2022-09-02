@@ -1,6 +1,6 @@
 module Game.Coin where
 
-import System.Random ( StdGen, uniformR )
+import System.Random ( StdGen, randomR )
 import Graphics.Gloss ( Picture, pictures, translate )
 import GHC.Float ( int2Float )
 
